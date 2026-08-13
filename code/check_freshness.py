@@ -3,7 +3,7 @@
 
 Why a project-specific table instead of the generic --auto mode: --auto infers the producer from
 the FILE NAME (results/foo.csv <- code/foo.py). No name matches here: matrix.csv is produced by
-g2_realreport.py, tau.csv by g2_tau.py, g3-regime.csv by g3_paper_artifacts.py. Running --auto
+rerun_report.py, hard-corpus.csv by h_score.py, compose.csv by corpus_tables.py. Running --auto
 returns exactly the right answer, "no pair could be inferred, so NOTHING WAS CHECKED". That report
 is correct, and the correct fix is to DECLARE the mapping, not to loosen --auto.
 
@@ -34,8 +34,8 @@ RAW_G4 = [f"raw/g4-{t}-s{i}-20260813.txt" for t in ("opus","sonnet","haiku") for
 RAW_H  = [f"raw/h-{t}-r{i}-20260813.txt" for t in ("opus","sonnet","haiku") for i in (1,2,3)]
 
 MAP = {
-    "compose.csv":    (TBL,  "g2_tables.py",          []),
-    "corpus.csv":     (TBL,  "g2_tables.py",          []),
+    "compose.csv":    (TBL,  "corpus_tables.py",      []),
+    "corpus.csv":     (TBL,  "corpus_tables.py",      []),
     # g4_analyze.py WRITES g4_verdicts.json and then reads it back, so the verdict file is an
     # OUTPUT, not an input. Listing it here would make the gate compare a file against itself.
     # The re-run reports read DIRECTLY from raw/, so their dependencies are THE RAW LOG FILES
@@ -52,11 +52,7 @@ MAP = {
 
 # local modules each producer imports (the CSV must also be newer than these)
 IMPORTS = {
-    "g2_realreport.py":      ["g2_corpus.py", "g2_gates.py"],
-    "g2_tau.py":             ["g2_corpus.py", "g2_gates.py"],
-    "g3_paper_artifacts.py": ["g2_corpus.py", "g2_gates.py"],
-    "g2_tables.py":          ["g2_corpus.py"],
-    "g4_analyze.py":         ["g4_corpus.py"],
+    "corpus_tables.py":      ["g2_corpus.py"],
     "rerun_report.py":       ["g2_corpus.py", "g2_gates.py", "g4_corpus.py"],
     "h_score.py":            ["h_corpus.py"],
 }

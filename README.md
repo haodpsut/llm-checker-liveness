@@ -31,6 +31,7 @@ code/
   g2_parse_raw.py         raw logs -> verdicts, fail-closed
   rerun_report.py         raw logs -> range CSVs + mode proportions with exact intervals
   h_score.py              raw logs -> hard-corpus CSVs, per defect class
+  corpus_tables.py        corpus-composition tables (no measurement input)
   check_freshness.py      every CSV must be newer than its producer and its raw data
   csv-producer.map        which script produces which CSV
   raw/                    58 raw checker logs + RUN-LOG.md
@@ -69,6 +70,11 @@ reporting a pass.
 
 **Silent truncation is a bug.** When the pooling step has to drop surplus runs, it prints how many
 and from which condition.
+
+**A clean-clone check runs every script, not just the documented ones.** Retiring a set of tables
+once left a consumer of them crashing at import, while the five commands above all still passed.
+`paper/tables/legacy-28jul/producers/` holds the scripts behind the retired set; they are kept for
+provenance and are not expected to run against the current layout.
 
 ## Known limits
 
