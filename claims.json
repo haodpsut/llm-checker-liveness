@@ -352,5 +352,273 @@
    "condition": "lenient_weak_mode"
   },
   "agg": "value"
+ },
+ {
+  "id": "hard_attest_fp_perclass",
+  "paper_value": "0",
+  "csv": "tables/hard-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "pool": "strong-first",
+   "mode": "per-class",
+   "tau": "0.90",
+   "config": "ATTEST",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "ATTEST reaches 0 judgment false-pass once the screen fires"
+ },
+ {
+  "id": "hard_nopc_fp_min",
+  "paper_value": "0.1333",
+  "csv": "tables/hard-matrix.csv",
+  "column": "min",
+  "filter": {
+   "pool": "strong-first",
+   "mode": "per-class",
+   "tau": "0.90",
+   "config": "-positive-control",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "lower end of the 13-20% liveness separation"
+ },
+ {
+  "id": "hard_nopc_fp_max",
+  "paper_value": "0.2000",
+  "csv": "tables/hard-matrix.csv",
+  "column": "max",
+  "filter": {
+   "pool": "strong-first",
+   "mode": "per-class",
+   "tau": "0.90",
+   "config": "-positive-control",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "upper end of the 13-20% liveness separation"
+ },
+ {
+  "id": "hard_attest_leaks_at_085",
+  "paper_value": "0.1333",
+  "csv": "tables/hard-matrix.csv",
+  "column": "max",
+  "filter": {
+   "pool": "strong-first",
+   "mode": "pooled",
+   "tau": "0.85",
+   "config": "ATTEST",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "at tau=0.85 the screen admits the blind checker and ATTEST itself leaks"
+ },
+ {
+  "id": "hard_singlejudge_cheapfirst",
+  "paper_value": "0.2000",
+  "csv": "tables/hard-matrix.csv",
+  "column": "max",
+  "filter": {
+   "pool": "cheap-first",
+   "mode": "per-class",
+   "tau": "0.90",
+   "config": "single LLM-judge",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "the same baseline reads 0.00 under strong-first pool order"
+ },
+ {
+  "id": "hard_singlejudge_strongfirst",
+  "paper_value": "0",
+  "csv": "tables/hard-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "pool": "strong-first",
+   "mode": "per-class",
+   "tau": "0.90",
+   "config": "single LLM-judge",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "pool order, not data, decides this cell"
+ },
+ {
+  "id": "selfreview_tier_arm_zero",
+  "paper_value": "0",
+  "csv": "tables/rerun-g3-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "config": "soft self-review",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "the 53.3% self-review leak is the prompt arm only; the tier arm is 0"
+ },
+ {
+  "id": "paired_discordant",
+  "paper_value": "14",
+  "csv": "tables/hard-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "ATTEST_vs_no_poscontrol",
+   "quantity": "discordant_total"
+  },
+  "agg": "value",
+  "note": "artifacts decided differently by ATTEST and by -positive-control across three runs"
+ },
+ {
+  "id": "paired_all_one_way",
+  "paper_value": "0",
+  "csv": "tables/hard-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "ATTEST_vs_no_poscontrol",
+   "quantity": "discordant_other_blocks"
+  },
+  "agg": "value",
+  "note": "none of the discordant pairs runs the other way"
+ },
+ {
+  "id": "paired_p",
+  "paper_value": "0.000122",
+  "csv": "tables/hard-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "ATTEST_vs_no_poscontrol",
+   "quantity": "p_two_sided"
+  },
+  "agg": "value",
+  "note": "prose rounds this to 1.2e-4"
+ },
+ {
+  "id": "ci_hi_0of30",
+  "paper_value": "0.1157",
+  "csv": "tables/hard-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "fp_judge_0_of_30",
+   "quantity": "ci_hi"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "ci_lo_4of30",
+  "paper_value": "0.0376",
+  "csv": "tables/hard-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "fp_judge_4_of_30",
+   "quantity": "ci_lo"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "ci_hi_6of30",
+  "paper_value": "0.3857",
+  "csv": "tables/hard-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "fp_judge_6_of_30",
+   "quantity": "ci_hi"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hardmatrix_nopc_pct_lo",
+  "paper_value": "13",
+  "csv": "tables/hard-matrix.csv",
+  "column": "min_pct",
+  "filter": {
+   "pool": "strong-first",
+   "mode": "per-class",
+   "tau": "0.90",
+   "config": "-positive-control",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "the table prints percentages, so the percentage is the traceable cell"
+ },
+ {
+  "id": "hardmatrix_nopc_pct_hi",
+  "paper_value": "20",
+  "csv": "tables/hard-matrix.csv",
+  "column": "max_pct",
+  "filter": {
+   "pool": "strong-first",
+   "mode": "per-class",
+   "tau": "0.90",
+   "config": "-positive-control",
+   "metric": "fp_judge"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hardmatrix_noverify_pct",
+  "paper_value": "100",
+  "csv": "tables/hard-matrix.csv",
+  "column": "min_pct",
+  "filter": {
+   "pool": "strong-first",
+   "mode": "per-class",
+   "tau": "0.90",
+   "config": "no-verification",
+   "metric": "fp_judge"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "compose_scopegap_subtle",
+  "paper_value": "7",
+  "csv": "tables/compose.csv",
+  "column": "n_subtle",
+  "filter": {
+   "class": "scope-gap"
+  },
+  "agg": "value",
+  "note": "the only value appearing once in the composition table"
+ },
+ {
+  "id": "lenient_mode_low",
+  "paper_value": "9",
+  "csv": "tables/rerun-modes.csv",
+  "column": "mode_low",
+  "filter": {
+   "condition": "lenient_weak_mode"
+  },
+  "agg": "value",
+  "note": "the weak attractor: 9 of 45 defects detected"
+ },
+ {
+  "id": "lenient_mode_high",
+  "paper_value": "45",
+  "csv": "tables/rerun-modes.csv",
+  "column": "mode_high",
+  "filter": {
+   "condition": "lenient_weak_mode"
+  },
+  "agg": "value",
+  "note": "the competent attractor: all 45"
+ },
+ {
+  "id": "lenient_n_distinct",
+  "paper_value": "2",
+  "csv": "tables/rerun-modes.csv",
+  "column": "n_distinct_values",
+  "filter": {
+   "condition": "lenient_weak_mode"
+  },
+  "agg": "value",
+  "note": "exactly two values ever observed across twelve runs; this is the bimodality claim"
+ },
+ {
+  "id": "strict_ff_mode_high",
+  "paper_value": "4",
+  "csv": "tables/rerun-modes.csv",
+  "column": "mode_high",
+  "filter": {
+   "condition": "strict_falsereject_mode"
+  },
+  "agg": "value"
  }
 ]

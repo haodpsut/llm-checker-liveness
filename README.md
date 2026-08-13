@@ -2,18 +2,33 @@
 
 This is the artifact for a measurement study of **positive-control liveness**: the idea that a
 verification gate should emit PASS only while its checkers keep catching a pool of seeded defects.
-We built such a gate, measured it, and report what the measurements say. They are mostly negative
-about it.
+We built such a gate, measured it, reported a null, and then had to retract that null. An external
+reader pointed out that the liveness threshold we evaluated sat below every checker's seeded
+detection rate, so the screen never excluded anybody: the mechanism was switched off for the whole
+comparison. Re-measured on a harder benchmark with the threshold placed where it discriminates, the
+mechanism separates by 13 to 20 points. Both the original null and the correction are in here.
 
 Everything quoted in the paper is derived here, and every derivation starts from a **raw checker
 log** in `code/raw/`.
 
-## The two findings the artifact is for
+## The three findings the artifact is for
 
 **The blind spot moves.** On the harder benchmark the cheap checker fails *systematically*, missing
 an entire defect class rather than scattered instances, which is the regime liveness screening
 exists for. But *which* class it is blind to changes between identical runs. See
 `paper/tables/hard-blindspot-shift.csv` and the three `code/raw/h-cheap-r*.txt` logs.
+
+**A mechanism that never fires cannot be measured, and looks exactly like a mechanism that does not
+work.** Every internal gate passed the original null, because a filter that excludes nobody is
+perfectly consistent with itself. `code/h_matrix.py` re-runs the whole ablation matrix at thresholds
+that do fire, and reports, as its top line, *how many checkers the screen actually excluded in each
+run*. That count is the cheapest evidence that a verification mechanism is switched on at all, and
+it was missing. See `paper/tables/hard-matrix.csv`.
+
+The same file also shows a second artefact we found while checking the first: the single-judge and
+single-checker ablations reduce the pool to one member and took the first, so writing the pool
+strong-first silently handed the single-judge baseline the best checker. Both pool orderings are
+reported; two rows exchange values under a change that alters no data.
 
 **Checker competence is bimodal, not noisy.** Across twelve identical runs the lenient checker
 detected either 9 or 45 of 45 defects and never any value between; the strict checker rejected
@@ -31,10 +46,12 @@ code/
   g2_parse_raw.py         raw logs -> verdicts, fail-closed
   rerun_report.py         raw logs -> range CSVs + mode proportions with exact intervals
   h_score.py              raw logs -> hard-corpus CSVs, per defect class
-  corpus_tables.py        corpus-composition tables (no measurement input)
+  h_matrix.py             the ablation matrix at thresholds that fire, both pool orderings,
+                          plus the paired test and its exact intervals
+  provenance.py           derives raw/PROVENANCE.md from the orchestration log
   check_freshness.py      every CSV must be newer than its producer and its raw data
   csv-producer.map        which script produces which CSV
-  raw/                    58 raw checker logs + RUN-LOG.md
+  raw/                    58 raw checker logs + RUN-LOG.md + PROVENANCE.md
 paper/
   tables/                 every CSV the paper cites
   tables/legacy-28jul/    an earlier, retired measurement set, kept for comparison
@@ -53,6 +70,8 @@ python3 code/g2_parse_raw.py     # raw logs -> verdicts, blocks on a missing or 
 python3 code/h_audit.py          # 60/60 labels must agree with the text they were derived from
 python3 code/rerun_report.py     # -> paper/tables/rerun-*.csv
 python3 code/h_score.py          # -> paper/tables/hard-corpus.csv, hard-blindspot-shift.csv
+python3 code/corpus_tables.py    # -> paper/tables/compose.csv, corpus.csv
+python3 code/h_matrix.py         # -> paper/tables/hard-matrix.csv, hard-paired.csv
 python3 code/check_freshness.py  # no table may be older than the data behind it
 ```
 
@@ -71,10 +90,14 @@ reporting a pass.
 **Silent truncation is a bug.** When the pooling step has to drop surplus runs, it prints how many
 and from which condition.
 
-**A clean-clone check runs every script, not just the documented ones.** Retiring a set of tables
-once left a consumer of them crashing at import, while the five commands above all still passed.
-`paper/tables/legacy-28jul/producers/` holds the scripts behind the retired set; they are kept for
-provenance and are not expected to run against the current layout.
+**Percentages are stored, not left to the reader.** Every table in the paper prints percentages
+while the CSVs held fractions, so no printed cell could be matched against the artifact. Each
+producer now emits the percentage columns alongside the fractions.
+
+**What was not recorded cannot be reconstructed honestly.** Sampling temperature was never settable
+through the launch interface, and the build behind two of the three model aliases was never echoed
+back. `raw/PROVENANCE.md` states both as unknown rather than filling them in, and the per-arm launch
+table is derived from the orchestration log rather than typed from memory.
 
 ## Known limits
 
@@ -83,3 +106,7 @@ proportion estimates rest on 9 to 12 runs, so their exact-binomial intervals are
 the claim that both modes occur often rather than any precise rate. The first benchmark is
 saturated on judgment predicates and can no longer discriminate among verification architectures;
 the second separates the cheap tier by roughly 0.15, so where the transition actually sits is open.
+The 13 to 20 point liveness separation rests on a paired comparison: the marginal Clopper-Pearson
+intervals for 0/30 against 4/30 and 6/30 overlap, and only the pairing (14 discordant artifacts,
+all in the same direction, two-sided p = 1.22e-4) makes the difference decisive. Both are reported
+in `paper/tables/hard-paired.csv`; neither should be quoted without the other.

@@ -48,6 +48,8 @@ MAP = {
     "rerun-modes.csv":     (TBL, "rerun_report.py", RAW_G2 + RAW_G4),
     "hard-corpus.csv":          (TBL, "h_score.py", RAW_H),
     "hard-blindspot-shift.csv": (TBL, "h_score.py", RAW_H),
+    "hard-matrix.csv":          (TBL, "h_matrix.py", RAW_H),
+    "hard-paired.csv":          (TBL, "h_matrix.py", RAW_H),
 }
 
 # local modules each producer imports (the CSV must also be newer than these)
@@ -55,6 +57,7 @@ IMPORTS = {
     "corpus_tables.py":      ["g2_corpus.py"],
     "rerun_report.py":       ["g2_corpus.py", "g2_gates.py", "g4_corpus.py"],
     "h_score.py":            ["h_corpus.py"],
+    "h_matrix.py":           ["h_corpus.py", "g2_gates.py"],
 }
 
 
@@ -62,9 +65,28 @@ def mtime(p):
     return os.path.getmtime(p) if os.path.exists(p) else None
 
 
+def unlisted_csvs():
+    """Every CSV in the tables directory that MAP does not mention.
+
+    Why this exists. MAP was hand-maintained, and two CSVs added on 13/08/2026 (hard-matrix.csv,
+    hard-paired.csv) were registered in `csv-producer.map` but not here, because the project carries
+    two copies of the same mapping. The gate then checked 10 files, said "PASS -- 10 CSVs", and the
+    two it skipped were precisely the ones carrying the paper's new headline result. Nothing in the
+    output distinguished "10 checked and all fresh" from "10 checked, 2 ignored".
+
+    The general rule this enforces: a completeness gate must compare its checklist against what is
+    actually on disk, or adding a new output silently exempts that output from checking. Adding a
+    file must never be the way to avoid a gate.
+    """
+    if not os.path.isdir(TBL):
+        return []
+    return sorted(n for n in os.listdir(TBL) if n.endswith(".csv") and n not in MAP)
+
+
 def main():
     stale, missing, checked = [], [], 0
     print("check_freshness -- a CSV must be newer than its producer, its imports, and its raw data\n")
+    orphans = unlisted_csvs()
     for csv, (d, prod, raws) in sorted(MAP.items()):
         cpath = os.path.join(d, csv)
         ppath = os.path.join(HERE, prod)
@@ -100,7 +122,15 @@ def main():
     if stale or missing:
         print(f"\nFAIL -- {len(stale)} stale files, {len(missing)} missing dependencies.")
         return 2
-    print(f"\nPASS -- {len(MAP)} CSVs, all newer than their producers and their raw data.")
+    if orphans:
+        print(f"\nBLOCK -- {len(orphans)} CSV(s) in {os.path.relpath(TBL, ROOT)} are NOT in MAP and "
+              f"were therefore NOT CHECKED:")
+        for o in orphans:
+            print(f"      {o}")
+        print("  An unlisted output is an unchecked output. Declare its producer and raw inputs.")
+        return 2
+    print(f"\nPASS -- {len(MAP)} CSVs (every CSV present in the directory), all newer than their "
+          f"producers and their raw data.")
     return 0
 
 

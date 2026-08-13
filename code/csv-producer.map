@@ -8,3 +8,5 @@ rerun-g3-matrix.csv=rerun_report.py
 rerun-modes.csv=rerun_report.py
 hard-corpus.csv=h_score.py
 hard-blindspot-shift.csv=h_score.py
+hard-matrix.csv=h_matrix.py
+hard-paired.csv=h_matrix.py

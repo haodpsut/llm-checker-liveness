@@ -1,0 +1,85 @@
+pool,mode,tau,config,metric,mean,min,max,n_runs,min_pct,max_pct
+strong-first,pooled,0.85,ATTEST,fp_judge,0.0889,0.0000,0.1333,3,0,13
+strong-first,pooled,0.85,ATTEST,ff_clean,0.0667,0.0000,0.2000,3,0,20
+strong-first,pooled,0.85,-positive-control,fp_judge,0.1556,0.1333,0.2000,3,13,20
+strong-first,pooled,0.85,-positive-control,ff_clean,0.0667,0.0000,0.2000,3,0,20
+strong-first,pooled,0.85,-honest-neg-block,fp_judge,0.0889,0.0000,0.1333,3,0,13
+strong-first,pooled,0.85,-honest-neg-block,ff_clean,0.0667,0.0000,0.2000,3,0,20
+strong-first,pooled,0.85,-multichecker (single),fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.85,-multichecker (single),ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.85,single LLM-judge,fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.85,single LLM-judge,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.85,soft self-review,fp_judge,0.1556,0.1333,0.2000,3,13,20
+strong-first,pooled,0.85,soft self-review,ff_clean,0.0667,0.0000,0.2000,3,0,20
+strong-first,pooled,0.85,no-verification,fp_judge,1.0000,1.0000,1.0000,3,100,100
+strong-first,pooled,0.85,no-verification,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,ATTEST,fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,ATTEST,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,-positive-control,fp_judge,0.1556,0.1333,0.2000,3,13,20
+strong-first,pooled,0.90,-positive-control,ff_clean,0.0667,0.0000,0.2000,3,0,20
+strong-first,pooled,0.90,-honest-neg-block,fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,-honest-neg-block,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,-multichecker (single),fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,-multichecker (single),ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,single LLM-judge,fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,single LLM-judge,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,pooled,0.90,soft self-review,fp_judge,0.1556,0.1333,0.2000,3,13,20
+strong-first,pooled,0.90,soft self-review,ff_clean,0.0667,0.0000,0.2000,3,0,20
+strong-first,pooled,0.90,no-verification,fp_judge,1.0000,1.0000,1.0000,3,100,100
+strong-first,pooled,0.90,no-verification,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,ATTEST,fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,ATTEST,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,-positive-control,fp_judge,0.1556,0.1333,0.2000,3,13,20
+strong-first,per-class,0.90,-positive-control,ff_clean,0.0667,0.0000,0.2000,3,0,20
+strong-first,per-class,0.90,-honest-neg-block,fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,-honest-neg-block,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,-multichecker (single),fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,-multichecker (single),ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,single LLM-judge,fp_judge,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,single LLM-judge,ff_clean,0.0000,0.0000,0.0000,3,0,0
+strong-first,per-class,0.90,soft self-review,fp_judge,0.1556,0.1333,0.2000,3,13,20
+strong-first,per-class,0.90,soft self-review,ff_clean,0.0667,0.0000,0.2000,3,0,20
+strong-first,per-class,0.90,no-verification,fp_judge,1.0000,1.0000,1.0000,3,100,100
+strong-first,per-class,0.90,no-verification,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.85,ATTEST,fp_judge,0.0889,0.0000,0.1333,3,0,13
+cheap-first,pooled,0.85,ATTEST,ff_clean,0.0667,0.0000,0.2000,3,0,20
+cheap-first,pooled,0.85,-positive-control,fp_judge,0.1556,0.1333,0.2000,3,13,20
+cheap-first,pooled,0.85,-positive-control,ff_clean,0.0667,0.0000,0.2000,3,0,20
+cheap-first,pooled,0.85,-honest-neg-block,fp_judge,0.0889,0.0000,0.1333,3,0,13
+cheap-first,pooled,0.85,-honest-neg-block,ff_clean,0.0667,0.0000,0.2000,3,0,20
+cheap-first,pooled,0.85,-multichecker (single),fp_judge,0.0889,0.0000,0.1333,3,0,13
+cheap-first,pooled,0.85,-multichecker (single),ff_clean,0.4000,0.0000,1.0000,3,0,100
+cheap-first,pooled,0.85,single LLM-judge,fp_judge,0.1556,0.1333,0.2000,3,13,20
+cheap-first,pooled,0.85,single LLM-judge,ff_clean,0.0667,0.0000,0.2000,3,0,20
+cheap-first,pooled,0.85,soft self-review,fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.85,soft self-review,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.85,no-verification,fp_judge,1.0000,1.0000,1.0000,3,100,100
+cheap-first,pooled,0.85,no-verification,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.90,ATTEST,fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.90,ATTEST,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.90,-positive-control,fp_judge,0.1556,0.1333,0.2000,3,13,20
+cheap-first,pooled,0.90,-positive-control,ff_clean,0.0667,0.0000,0.2000,3,0,20
+cheap-first,pooled,0.90,-honest-neg-block,fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.90,-honest-neg-block,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.90,-multichecker (single),fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.90,-multichecker (single),ff_clean,1.0000,1.0000,1.0000,3,100,100
+cheap-first,pooled,0.90,single LLM-judge,fp_judge,0.1556,0.1333,0.2000,3,13,20
+cheap-first,pooled,0.90,single LLM-judge,ff_clean,0.0667,0.0000,0.2000,3,0,20
+cheap-first,pooled,0.90,soft self-review,fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.90,soft self-review,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,pooled,0.90,no-verification,fp_judge,1.0000,1.0000,1.0000,3,100,100
+cheap-first,pooled,0.90,no-verification,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,per-class,0.90,ATTEST,fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,per-class,0.90,ATTEST,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,per-class,0.90,-positive-control,fp_judge,0.1556,0.1333,0.2000,3,13,20
+cheap-first,per-class,0.90,-positive-control,ff_clean,0.0667,0.0000,0.2000,3,0,20
+cheap-first,per-class,0.90,-honest-neg-block,fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,per-class,0.90,-honest-neg-block,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,per-class,0.90,-multichecker (single),fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,per-class,0.90,-multichecker (single),ff_clean,1.0000,1.0000,1.0000,3,100,100
+cheap-first,per-class,0.90,single LLM-judge,fp_judge,0.1556,0.1333,0.2000,3,13,20
+cheap-first,per-class,0.90,single LLM-judge,ff_clean,0.0667,0.0000,0.2000,3,0,20
+cheap-first,per-class,0.90,soft self-review,fp_judge,0.0000,0.0000,0.0000,3,0,0
+cheap-first,per-class,0.90,soft self-review,ff_clean,0.0000,0.0000,0.0000,3,0,0
+cheap-first,per-class,0.90,no-verification,fp_judge,1.0000,1.0000,1.0000,3,100,100
+cheap-first,per-class,0.90,no-verification,ff_clean,0.0000,0.0000,0.0000,3,0,0

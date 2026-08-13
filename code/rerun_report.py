@@ -66,10 +66,15 @@ def rate(v, keep):
 
 def band(vals):
     """mean/min/max at 4 decimals. Never returns mean alone."""
-    return [f"{st.mean(vals):.4f}", f"{min(vals):.4f}", f"{max(vals):.4f}", str(len(vals))]
+    # Percent columns are emitted alongside the fractions because every TABLE in the paper prints
+    # percentages. Without them the printed cell cannot be matched against the artifact at all, and
+    # a number-tracing gate reports the whole table as untraceable, which is indistinguishable from
+    # a stale number left behind from an earlier run.
+    return [f"{st.mean(vals):.4f}", f"{min(vals):.4f}", f"{max(vals):.4f}", str(len(vals)),
+            f"{100*st.mean(vals):.1f}", f"{100*min(vals):.0f}", f"{100*max(vals):.0f}"]
 
 
-HDR = ["mean", "min", "max", "n_runs"]
+HDR = ["mean", "min", "max", "n_runs", "mean_pct", "min_pct", "max_pct"]
 
 
 def wcsv(name, header, rows):
@@ -228,8 +233,19 @@ def modes():
     rows.append(["g4_haiku_overreject", k, len(fs), f"{k/len(fs):.4f}",
                  f"{lo:.4f}", f"{hi:.4f}", "0|1"])
 
+    # `observed_values` is a pipe-joined STRING, so the two attractors it names are invisible to
+    # any tool that reads CSV cells as numbers: the paper prints "9 or 45 of 45" and no cell held
+    # 9, 45 or the denominator. Split them into numeric columns as well, so the printed table can
+    # be traced back cell by cell rather than by reading a string with the eye.
+    out = []
+    for r in rows:
+        vs = [v for v in r[6].split("|") if v.strip().lstrip("-").isdigit()]
+        lo_v = min(map(int, vs)) if vs else ""
+        hi_v = max(map(int, vs)) if vs else ""
+        out.append(list(r) + [lo_v, hi_v, len(vs)])
     wcsv("rerun-modes.csv",
-         ["condition", "k_bad", "n_runs", "p_bad", "ci_lo", "ci_hi", "observed_values"], rows)
+         ["condition", "k_bad", "n_runs", "p_bad", "ci_lo", "ci_hi", "observed_values",
+          "mode_low", "mode_high", "n_distinct_values"], out)
     return rows
 
 def main():

@@ -1,22 +1,22 @@
-config,metric,mean,min,max,n_runs
-ATTEST,fp_judge,0.0000,0.0000,0.0000,3
-ATTEST,fp_dec,0.0000,0.0000,0.0000,3
-ATTEST,ff_clean,0.0000,0.0000,0.0000,3
--positive-control,fp_judge,0.0000,0.0000,0.0000,3
--positive-control,fp_dec,0.0000,0.0000,0.0000,3
--positive-control,ff_clean,0.0000,0.0000,0.0000,3
--honest-neg-block,fp_judge,0.0000,0.0000,0.0000,3
--honest-neg-block,fp_dec,0.0000,0.0000,0.0000,3
--honest-neg-block,ff_clean,0.0000,0.0000,0.0000,3
--multichecker (single),fp_judge,0.0000,0.0000,0.0000,3
--multichecker (single),fp_dec,0.0000,0.0000,0.0000,3
--multichecker (single),ff_clean,0.0000,0.0000,0.0000,3
-single LLM-judge,fp_judge,0.0000,0.0000,0.0000,3
-single LLM-judge,fp_dec,0.0000,0.0000,0.0000,3
-single LLM-judge,ff_clean,0.0000,0.0000,0.0000,3
-soft self-review,fp_judge,0.0000,0.0000,0.0000,3
-soft self-review,fp_dec,1.0000,1.0000,1.0000,3
-soft self-review,ff_clean,0.0000,0.0000,0.0000,3
-no-verification,fp_judge,1.0000,1.0000,1.0000,3
-no-verification,fp_dec,1.0000,1.0000,1.0000,3
-no-verification,ff_clean,0.0000,0.0000,0.0000,3
+config,metric,mean,min,max,n_runs,mean_pct,min_pct,max_pct
+ATTEST,fp_judge,0.0000,0.0000,0.0000,3,0.0,0,0
+ATTEST,fp_dec,0.0000,0.0000,0.0000,3,0.0,0,0
+ATTEST,ff_clean,0.0000,0.0000,0.0000,3,0.0,0,0
+-positive-control,fp_judge,0.0000,0.0000,0.0000,3,0.0,0,0
+-positive-control,fp_dec,0.0000,0.0000,0.0000,3,0.0,0,0
+-positive-control,ff_clean,0.0000,0.0000,0.0000,3,0.0,0,0
+-honest-neg-block,fp_judge,0.0000,0.0000,0.0000,3,0.0,0,0
+-honest-neg-block,fp_dec,0.0000,0.0000,0.0000,3,0.0,0,0
+-honest-neg-block,ff_clean,0.0000,0.0000,0.0000,3,0.0,0,0
+-multichecker (single),fp_judge,0.0000,0.0000,0.0000,3,0.0,0,0
+-multichecker (single),fp_dec,0.0000,0.0000,0.0000,3,0.0,0,0
+-multichecker (single),ff_clean,0.0000,0.0000,0.0000,3,0.0,0,0
+single LLM-judge,fp_judge,0.0000,0.0000,0.0000,3,0.0,0,0
+single LLM-judge,fp_dec,0.0000,0.0000,0.0000,3,0.0,0,0
+single LLM-judge,ff_clean,0.0000,0.0000,0.0000,3,0.0,0,0
+soft self-review,fp_judge,0.0000,0.0000,0.0000,3,0.0,0,0
+soft self-review,fp_dec,1.0000,1.0000,1.0000,3,100.0,100,100
+soft self-review,ff_clean,0.0000,0.0000,0.0000,3,0.0,0,0
+no-verification,fp_judge,1.0000,1.0000,1.0000,3,100.0,100,100
+no-verification,fp_dec,1.0000,1.0000,1.0000,3,100.0,100,100
+no-verification,ff_clean,0.0000,0.0000,0.0000,3,0.0,0,0
