@@ -1,0 +1,4 @@
+model,seed_judge,heldout_judge,gap
+opus,1.0000,1.0000,+0.0000
+sonnet,1.0000,1.0000,+0.0000
+haiku,0.8000,0.6000,+0.2000

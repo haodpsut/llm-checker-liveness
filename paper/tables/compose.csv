@@ -1,0 +1,6 @@
+class,kind,n_seed,n_heldout,n_subtle,n_moderate
+infeasible,judgment,6,12,12,6
+overlapping-ci-superiority,judgment,3,6,6,3
+scope-gap,judgment,3,6,7,2
+antithetical-ablation,judgment,3,6,5,4
+fabricated-citation,decidable,3,6,9,0

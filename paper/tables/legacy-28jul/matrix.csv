@@ -1,0 +1,9 @@
+config,fp_judge,fp_dec,ff_clean,hn_catch
+ATTEST,0.0000,0.0000,0.0000,1.0000
+soft self-review,0.5667,1.0000,0.0000,0.5000
+single LLM-judge,0.4667,1.0000,0.0000,0.6667
+-positive-control,0.3333,0.0000,0.0000,1.0000
+-human-transition (auto-chain),0.0000,0.0000,0.0000,1.0000
+-honest-neg-block,0.0000,0.0000,0.0000,1.0000
+-multichecker (single),0.4667,0.0000,0.0000,0.6667
+no-verification,1.0000,1.0000,0.0000,0.0000

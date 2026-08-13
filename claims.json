@@ -1,0 +1,356 @@
+[
+ {
+  "id": "corpus_total",
+  "paper_value": "72",
+  "csv": "tables/corpus.csv",
+  "column": "n",
+  "filter": {
+   "quantity": "total"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "corpus_clean",
+  "paper_value": "18",
+  "csv": "tables/corpus.csv",
+  "column": "n",
+  "filter": {
+   "quantity": "clean"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "corpus_defective",
+  "paper_value": "54",
+  "csv": "tables/corpus.csv",
+  "column": "n",
+  "filter": {
+   "quantity": "defective"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g2_attest_fp",
+  "paper_value": "0.0",
+  "csv": "tables/rerun-g2-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "config": "ATTEST",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "scale": "x*100"
+ },
+ {
+  "id": "g2_attest_ff",
+  "paper_value": "7.4",
+  "csv": "tables/rerun-g2-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "config": "ATTEST",
+   "metric": "ff_clean"
+  },
+  "agg": "value",
+  "scale": "x*100"
+ },
+ {
+  "id": "g2_attest_ff_max",
+  "paper_value": "22",
+  "csv": "tables/rerun-g2-matrix.csv",
+  "column": "max",
+  "filter": {
+   "config": "ATTEST",
+   "metric": "ff_clean"
+  },
+  "agg": "value",
+  "scale": "x*100",
+  "places": 0
+ },
+ {
+  "id": "g2_nopc_fp",
+  "paper_value": "0.0",
+  "csv": "tables/rerun-g2-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "config": "-positive-control",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "scale": "x*100"
+ },
+ {
+  "id": "g2_selfreview_fp",
+  "paper_value": "53.3",
+  "csv": "tables/rerun-g2-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "config": "soft self-review",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "scale": "x*100"
+ },
+ {
+  "id": "g2_selfreview_fp_max",
+  "paper_value": "80",
+  "csv": "tables/rerun-g2-matrix.csv",
+  "column": "max",
+  "filter": {
+   "config": "soft self-review",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "scale": "x*100",
+  "places": 0
+ },
+ {
+  "id": "g2_noverify_fp",
+  "paper_value": "100.0",
+  "csv": "tables/rerun-g2-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "config": "no-verification",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "scale": "x*100"
+ },
+ {
+  "id": "g2_lenient_held_min",
+  "paper_value": "0.20",
+  "csv": "tables/rerun-g2.csv",
+  "column": "min",
+  "filter": {
+   "rig": "lenient",
+   "metric": "held_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g2_lenient_held_max",
+  "paper_value": "1.00",
+  "csv": "tables/rerun-g2.csv",
+  "column": "max",
+  "filter": {
+   "rig": "lenient",
+   "metric": "held_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g3_strong_seed",
+  "paper_value": "1.00",
+  "csv": "tables/rerun-g3.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "opus",
+   "metric": "seed_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g3_mid_held",
+  "paper_value": "1.00",
+  "csv": "tables/rerun-g3.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "sonnet",
+   "metric": "held_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g3_cheap_seed",
+  "paper_value": "1.00",
+  "csv": "tables/rerun-g3.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "haiku",
+   "metric": "seed_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g3_cheap_held",
+  "paper_value": "1.00",
+  "csv": "tables/rerun-g3.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "haiku",
+   "metric": "held_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g3_cheap_citation",
+  "paper_value": "0.00",
+  "csv": "tables/rerun-g3.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "haiku",
+   "metric": "citation"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g3_strong_citation",
+  "paper_value": "1.00",
+  "csv": "tables/rerun-g3.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "opus",
+   "metric": "citation"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g4_cheap_falsereject",
+  "paper_value": "0.03",
+  "csv": "tables/rerun-g4.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "haiku",
+   "metric": "false_reject"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g4_mid_seed",
+  "paper_value": "1.00",
+  "csv": "tables/rerun-g4.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "sonnet",
+   "metric": "seed_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "g4_cheap_heldfp",
+  "paper_value": "0.00",
+  "csv": "tables/rerun-g4.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "haiku",
+   "metric": "held_fp"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "compose_infeasible_heldout",
+  "paper_value": "12",
+  "csv": "tables/compose.csv",
+  "column": "n_heldout",
+  "filter": {
+   "class": "infeasible"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "compose_infeasible_seed",
+  "paper_value": "6",
+  "csv": "tables/compose.csv",
+  "column": "n_seed",
+  "filter": {
+   "class": "infeasible"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hard_strong_held",
+  "paper_value": "1.00",
+  "csv": "tables/hard-corpus.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "opus",
+   "metric": "held_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hard_mid_held",
+  "paper_value": "1.00",
+  "csv": "tables/hard-corpus.csv",
+  "column": "mean",
+  "filter": {
+   "tier": "sonnet",
+   "metric": "held_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hard_cheap_held_min",
+  "paper_value": "0.80",
+  "csv": "tables/hard-corpus.csv",
+  "column": "min",
+  "filter": {
+   "tier": "haiku",
+   "metric": "held_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hard_cheap_held_max",
+  "paper_value": "0.87",
+  "csv": "tables/hard-corpus.csv",
+  "column": "max",
+  "filter": {
+   "tier": "haiku",
+   "metric": "held_detect"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hard_cheap_fr_max",
+  "paper_value": "0.20",
+  "csv": "tables/hard-corpus.csv",
+  "column": "max",
+  "filter": {
+   "tier": "haiku",
+   "metric": "false_reject"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hard_cheap_emptyfilter_min",
+  "paper_value": "0.00",
+  "csv": "tables/hard-corpus.csv",
+  "column": "min",
+  "filter": {
+   "tier": "haiku",
+   "metric": "class:empty-filter"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "hard_cheap_selection_min",
+  "paper_value": "0.33",
+  "csv": "tables/hard-corpus.csv",
+  "column": "min",
+  "filter": {
+   "tier": "haiku",
+   "metric": "class:selection-regression"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "lenient_mode_lo",
+  "paper_value": "0.10",
+  "csv": "tables/rerun-modes.csv",
+  "column": "ci_lo",
+  "filter": {
+   "condition": "lenient_weak_mode"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "lenient_mode_hi",
+  "paper_value": "0.65",
+  "csv": "tables/rerun-modes.csv",
+  "column": "ci_hi",
+  "filter": {
+   "condition": "lenient_weak_mode"
+  },
+  "agg": "value"
+ }
+]

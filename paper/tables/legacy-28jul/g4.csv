@@ -1,0 +1,4 @@
+tier,seed_detect_mean,seed_detect_std,heldout_detect_mean,heldout_detect_std,heldout_fp_mean,heldout_fp_std,false_reject_mean,false_reject_std
+opus,1.0000,0.0000,1.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+sonnet,0.9583,0.0589,1.0000,0.0000,0.0000,0.0000,0.0000,0.0000
+haiku,1.0000,0.0000,1.0000,0.0000,0.0000,0.0000,0.0833,0.0589

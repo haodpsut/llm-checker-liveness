@@ -1,0 +1,6 @@
+class,strict,moderate,lenient
+infeasible,1.0000,0.1667,0.0833
+overlapping-ci-superiority,1.0000,0.5000,0.0000
+scope-gap,1.0000,1.0000,1.0000
+antithetical-ablation,1.0000,0.8333,1.0000
+fabricated-citation,1.0000,0.0000,0.0000

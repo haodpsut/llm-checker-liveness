@@ -1,0 +1,13 @@
+tier,metric,mean,min,max,n_runs
+opus,seed_detect,1.0000,1.0000,1.0000,3
+opus,held_detect,1.0000,1.0000,1.0000,3
+opus,held_fp,0.0000,0.0000,0.0000,3
+opus,false_reject,0.0000,0.0000,0.0000,3
+sonnet,seed_detect,1.0000,1.0000,1.0000,3
+sonnet,held_detect,1.0000,1.0000,1.0000,3
+sonnet,held_fp,0.0000,0.0000,0.0000,3
+sonnet,false_reject,0.0000,0.0000,0.0000,3
+haiku,seed_detect,1.0000,1.0000,1.0000,10
+haiku,held_detect,1.0000,1.0000,1.0000,10
+haiku,held_fp,0.0000,0.0000,0.0000,10
+haiku,false_reject,0.0250,0.0000,0.1250,10

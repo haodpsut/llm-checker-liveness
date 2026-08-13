@@ -1,0 +1,39 @@
+{
+ "_note": "IV-1 at the CLAIM level. Important: this paper's central claim is a NULL ('no ablation separates from the full gate'), and a null is not a superlative. Only two sentences have superlative form; both are declared here with their full source list and an explicit reason for every excluded source.",
+ "superlatives": [
+  {
+   "label": "removing verification entirely is the worst configuration measured",
+   "value": 1.0,
+   "kind": "max",
+   "columns": [
+    "rerun-g2-matrix.csv:mean"
+   ],
+   "excluded": {
+    "rerun-g3-matrix.csv:mean": "same quantity but in the model-tier regime, where self-review reaches 0.0, lower, so it cannot be the maximum. Declared so the reader sees both regimes were considered.",
+    "rerun-g2.csv:mean": "per-CHECKER rate, not per gate configuration. Different unit of comparison.",
+    "rerun-g3.csv:mean": "as above, checker level rather than configuration level.",
+    "rerun-g4.csv:mean": "different corpus (28 reasoning artifacts); not directly comparable to the configuration matrix.",
+    "hard-corpus.csv:mean": "second corpus, different artifacts and different classes; not comparable to the first-corpus configuration matrix."
+   }
+  },
+  {
+   "label": "lenient held-out detection reaches 1.00 in its best of three runs",
+   "value": 1.0,
+   "kind": "max",
+   "columns": [
+    "rerun-g2.csv:max"
+   ],
+   "excluded": {
+    "rerun-g3.csv:max": "model tier, not prompt rigour. The sentence is about the lenient prompt.",
+    "rerun-g4.csv:max": "different reasoning corpus.",
+    "rerun-g2-matrix.csv:max": "gate-configuration level, not checker level.",
+    "rerun-g3-matrix.csv:max": "as above.",
+    "hard-corpus.csv:max": "second corpus; the sentence is about the lenient prompt on the first corpus."
+   }
+  }
+ ],
+ "exclusivity": [],
+ "_exclusivity_note": "The sentence 'the citation class is the ONLY class on which tiers still differ' is a genuine exclusivity claim, but it cannot be expressed through this gate's lens: the gate compares the SPREAD of two different COLUMNS, whereas here both quantities live in the SAME column and are distinguished by a `metric` field. Checked BY HAND: metric=citation spans 1.00 (strong) to 0.00 (mid, cheap); every other judgment metric is 1.00 across all three tiers, i.e. zero spread. Evidence in rerun-g3.csv, 12 rows.",
+ "mechanisms": [],
+ "_selfreview_note": "The sentence 'self-review is the worst configuration that still HAS a checker' cannot be declared here: the gate takes the maximum over the WHOLE column, and the column includes the no-verification row. Checked BY HAND in rerun-g2-matrix.csv: soft self-review fp_judge = 0.5333, every other configuration with a checker = 0.0000, no-verification = 1.0000. The sentence is correct; this gate simply has no row-level filter to confirm it."
+}

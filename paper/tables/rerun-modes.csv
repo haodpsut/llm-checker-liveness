@@ -1,0 +1,4 @@
+condition,k_bad,n_runs,p_bad,ci_lo,ci_hi,observed_values
+lenient_weak_mode,4,12,0.3333,0.0992,0.6511,9|45
+strict_falsereject_mode,6,9,0.6667,0.2993,0.9251,0|4
+g4_haiku_overreject,2,10,0.2000,0.0252,0.5561,0|1

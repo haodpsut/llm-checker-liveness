@@ -1,0 +1,16 @@
+matrix.csv=g2_realreport.py
+ggen.csv=g2_realreport.py
+perclass.csv=g2_realreport.py
+sweep.csv=g2_realreport.py
+tau.csv=g2_tau.py
+detect.csv=g2_tables.py
+compose.csv=g2_tables.py
+corpus.csv=g2_tables.py
+g3-regime.csv=g3_paper_artifacts.py
+g3-gradient.csv=g3_paper_artifacts.py
+g3-ggen.csv=g3_paper_artifacts.py
+g3-matrix.csv=g3_paper_artifacts.py
+g4.csv=g4_analyze.py
+rerun-modes.csv=rerun_report.py
+hard-corpus.csv=h_score.py
+hard-blindspot-shift.csv=h_score.py

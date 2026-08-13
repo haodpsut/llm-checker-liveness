@@ -1,0 +1,13 @@
+rig,metric,mean,min,max,n_runs
+strict,seed_detect,1.0000,1.0000,1.0000,9
+strict,held_detect,1.0000,1.0000,1.0000,9
+strict,citation,1.0000,1.0000,1.0000,9
+strict,false_reject,0.1481,0.0000,0.2222,9
+moderate,seed_detect,1.0000,1.0000,1.0000,3
+moderate,held_detect,1.0000,1.0000,1.0000,3
+moderate,citation,0.0000,0.0000,0.0000,3
+moderate,false_reject,0.0000,0.0000,0.0000,3
+lenient,seed_detect,0.7333,0.2000,1.0000,12
+lenient,held_detect,0.7333,0.2000,1.0000,12
+lenient,citation,0.0000,0.0000,0.0000,12
+lenient,false_reject,0.0000,0.0000,0.0000,12

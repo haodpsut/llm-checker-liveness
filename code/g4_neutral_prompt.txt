@@ -1,0 +1,32 @@
+You are a careful, competent reviewer of research claims. For EACH artifact (a claim plus its evidence), decide PASS (the reasoning is valid and the claim is fully supported) or FAIL (the reasoning is flawed). Watch for: complexity reductions argued in the WRONG direction; justifications that assume their own conclusion; causal claims drawn from purely observational correlation; and ablations that change more than one thing at once so isolate nothing. Reason carefully about the logic, not just the numbers.
+
+Output ONLY one line per artifact: <ID>: PASS or <ID>: FAIL. No other text.
+
+J-001: Claim: our scheduling problem is NP-hard. Evidence: we give a polynomial-time reduction from our problem to 3-SAT, and 3-SAT is NP-hard.
+J-002: Claim: problem P is at least as hard as vertex cover. Evidence: we reduce P to vertex cover in polynomial time.
+J-003: Claim: our routing problem is NP-hard. Evidence: we reduce it in polynomial time to the travelling salesman problem, which is NP-hard.
+J-004: Claim: allocation problem A is intractable. Evidence: A can be reduced to integer programming, which is NP-hard, so A is NP-hard.
+J-005: Claim: our matching variant is NP-complete. Evidence: it is in NP, and it reduces in polynomial time to max-flow.
+J-006: Claim: our scheduling variant is NP-hard. Evidence: we give a polynomial-time reduction from Hamiltonian cycle (NP-hard) to our variant.
+J-007: Claim: our problem is NP-hard. Evidence: we reduce set cover, which is NP-hard, to our problem in polynomial time.
+J-011: Claim: the selected features are the most informative. Evidence: they are exactly the features our selector returns, and our selector is designed to return the most informative features.
+J-012: Claim: our clustering is the correct one. Evidence: the points are grouped by our algorithm, which by construction produces the correct grouping.
+J-013: Claim: model M is the best calibrated. Evidence: it minimizes our calibration score, which we define as the quantity that M minimizes.
+J-014: Claim: our policy is optimal. Evidence: it achieves the highest reward under our reward model, and our reward model is defined so that this policy scores highest.
+J-015: Claim: these are the ground-truth labels. Evidence: they are the labels our annotation tool outputs, and the tool is defined to output ground truth.
+J-016: Claim: our selected features are informative. Evidence: replacing a random feature set with them raises held-out downstream accuracy from 0.71 to 0.86.
+J-017: Claim: model M is well calibrated. Evidence: its expected calibration error on a held-out set, computed independently of M, is 0.02.
+J-021: Claim: increasing buffer size causes lower loss, so we enlarge buffers. Evidence: across our logs, larger buffers coincide with lower loss.
+J-022: Claim: teams using our tool ship faster because the tool causes the speed-up. Evidence: in a survey, teams that adopted the tool report shorter cycle times.
+J-023: Claim: users who see feature X convert more because X drives conversion. Evidence: observational logs show X-exposed users convert at twice the rate.
+J-024: Claim: deeper networks generalize better, and depth is the cause. Evidence: in a scan of published models, deeper ones report higher accuracy.
+J-025: Claim: our regularizer causes the flatter minima we observe. Evidence: runs with the regularizer end at flatter minima than runs without it, which also used a different batch size and seed.
+J-026: Claim: buffer size correlates with lower loss; we use it only as a predictive feature and make no causal claim.
+J-027: Claim: our regularizer improves flatness. Evidence: a controlled A/B with only the regularizer toggled, all else fixed across 5 seeds, yields flatter minima.
+J-031: Claim: the attention module contributes +4% accuracy. Evidence: removing attention and simultaneously switching the optimizer from Adam to SGD dropped accuracy by 4%.
+J-032: Claim: our auxiliary loss adds 3 points. Evidence: the run without the loss also used a smaller model and less data, and scored 3 points lower.
+J-033: Claim: pretraining gives +6 BLEU. Evidence: the no-pretraining baseline was also trained for fewer steps with a different tokenizer, scoring 6 BLEU lower.
+J-034: Claim: the graph encoder is responsible for the gain. Evidence: the variant without it also removed skip connections and halved the hidden size, and performed worse.
+J-035: Claim: our sampler improves quality by 2 points. Evidence: the comparison run used the old sampler together with a shorter context window and fewer decoding steps.
+J-036: Claim: attention contributes +4% accuracy. Evidence: ablating only attention, with every other setting held identical, drops accuracy by 4%.
+J-037: Claim: pretraining gives +6 BLEU. Evidence: the sole difference from the baseline is the pretraining stage; steps, tokenizer, and data are identical.

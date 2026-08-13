@@ -1,0 +1,74 @@
+You are an ordinary reviewer. Skim the numbers; flag something only if it looks off. You do not always recompute sums or intervals.
+
+For EACH artifact output exactly one line `ID: PASS` or `ID: FAIL`.
+PASS = claim supported by evidence, no defect. FAIL = a defect is present.
+
+G2-019: Claim: the 4 flows fit within the shared link. Evidence: they are allocated 0.38, 0.28, 0.26, 0.28 of a link with normalized capacity 1.0.
+G2-020: Claim: the 4 flows fit within the shared link. Evidence: they are allocated 0.24, 0.32, 0.31, 0.34 of a link with normalized capacity 1.0.
+G2-021: Claim: the 4 flows fit within the shared link. Evidence: they are allocated 0.37, 0.35, 0.25, 0.23 of a link with normalized capacity 1.0.
+G2-028: Claim: the request meets its 50 ms latency budget. Evidence: the pipeline stages take 18 ms, 19 ms, and 16 ms.
+G2-029: Claim: the request meets its 50 ms latency budget. Evidence: the pipeline stages take 15 ms, 18 ms, and 20 ms.
+G2-030: Claim: the request meets its 60 ms latency budget. Evidence: the pipeline stages take 24 ms, 23 ms, and 16 ms.
+G2-037: Claim: our method is statistically significantly better. Evidence: F1 0.829 +/- 0.047 (ours) vs 0.81 +/- 0.047 (baseline) over 10 seeds.
+G2-038: Claim: our method is statistically significantly better. Evidence: F1 0.832 +/- 0.042 (ours) vs 0.815 +/- 0.042 (baseline) over 10 seeds.
+G2-039: Claim: our method is statistically significantly better. Evidence: F1 0.771 +/- 0.038 (ours) vs 0.756 +/- 0.038 (baseline) over 10 seeds.
+G2-046: Claim: our policy is robust to dense multi-user contention. Evidence: Table 5 reports strong results on a single-user setting only; no dense multi-user contention condition is tested.
+G2-047: Claim: our policy is robust to dense multi-user contention. Evidence: Table 5 reports strong results on a single-user setting only; no dense multi-user contention condition is tested.
+G2-048: Claim: our policy is robust to heavy rain fade. Evidence: Table 5 reports strong results on clear-sky conditions only; no heavy rain fade condition is tested.
+G2-055: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.25% (the reported seed noise is +/-0.3%).
+G2-056: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.09% (the reported seed noise is +/-0.3%).
+G2-057: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.22% (the reported seed noise is +/-0.3%).
+G2-022: Claim: the 3 flows fit within the shared link. Evidence: they are allocated 0.38, 0.39, 0.28 of a link with normalized capacity 1.0.
+G2-023: Claim: the 4 flows fit within the shared link. Evidence: they are allocated 0.32, 0.22, 0.3, 0.21 of a link with normalized capacity 1.0.
+G2-024: Claim: the 4 flows fit within the shared link. Evidence: they are allocated 0.3, 0.28, 0.23, 0.24 of a link with normalized capacity 1.0.
+G2-025: Claim: the 3 flows fit within the shared link. Evidence: they are allocated 0.41, 0.34, 0.3 of a link with normalized capacity 1.0.
+G2-026: Claim: the 3 flows fit within the shared link. Evidence: they are allocated 0.41, 0.34, 0.44 of a link with normalized capacity 1.0.
+G2-027: Claim: the 3 flows fit within the shared link. Evidence: they are allocated 0.31, 0.35, 0.39 of a link with normalized capacity 1.0.
+G2-031: Claim: the request meets its 60 ms latency budget. Evidence: the pipeline stages take 17 ms, 21 ms, and 25 ms.
+G2-032: Claim: the request meets its 60 ms latency budget. Evidence: the pipeline stages take 25 ms, 26 ms, and 24 ms.
+G2-033: Claim: the request meets its 60 ms latency budget. Evidence: the pipeline stages take 29 ms, 24 ms, and 22 ms.
+G2-034: Claim: the request meets its 60 ms latency budget. Evidence: the pipeline stages take 24 ms, 25 ms, and 14 ms.
+G2-035: Claim: the request meets its 60 ms latency budget. Evidence: the pipeline stages take 22 ms, 24 ms, and 17 ms.
+G2-036: Claim: the request meets its 50 ms latency budget. Evidence: the pipeline stages take 13 ms, 20 ms, and 20 ms.
+G2-040: Claim: our method is statistically significantly better. Evidence: F1 0.792 +/- 0.036 (ours) vs 0.76 +/- 0.036 (baseline) over 10 seeds.
+G2-041: Claim: our method is statistically significantly better. Evidence: F1 0.808 +/- 0.046 (ours) vs 0.767 +/- 0.046 (baseline) over 10 seeds.
+G2-042: Claim: our method is statistically significantly better. Evidence: F1 0.772 +/- 0.04 (ours) vs 0.756 +/- 0.04 (baseline) over 10 seeds.
+G2-043: Claim: our method is statistically significantly better. Evidence: F1 0.797 +/- 0.044 (ours) vs 0.757 +/- 0.044 (baseline) over 10 seeds.
+G2-044: Claim: our method is statistically significantly better. Evidence: F1 0.797 +/- 0.042 (ours) vs 0.78 +/- 0.042 (baseline) over 10 seeds.
+G2-045: Claim: our method is statistically significantly better. Evidence: F1 0.831 +/- 0.039 (ours) vs 0.815 +/- 0.039 (baseline) over 10 seeds.
+G2-049: Claim: our policy is robust to heavy rain fade. Evidence: we evaluate exclusively on clear-sky conditions; no heavy rain fade condition is tested.
+G2-050: Claim: our policy is robust to heavy rain fade. Evidence: we evaluate exclusively on clear-sky conditions; no heavy rain fade condition is tested.
+G2-051: Claim: our policy is robust to heavy rain fade. Evidence: Table 5 reports strong results on clear-sky conditions only; no heavy rain fade condition is tested.
+G2-052: Claim: our policy is robust to dense multi-user contention. Evidence: Table 5 reports strong results on a single-user setting only; no dense multi-user contention condition is tested.
+G2-053: Claim: our policy is robust to jamming. Evidence: Table 5 reports strong results on the interference-free channel only; no jamming condition is tested.
+G2-054: Claim: our policy is robust to heavy rain fade. Evidence: Table 5 reports strong results on clear-sky conditions only; no heavy rain fade condition is tested.
+G2-058: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.01% (the reported seed noise is +/-0.3%).
+G2-059: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.0% (the reported seed noise is +/-0.3%).
+G2-060: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.23% (the reported seed noise is +/-0.3%).
+G2-061: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.21% (the reported seed noise is +/-0.3%).
+G2-062: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.28% (the reported seed noise is +/-0.3%).
+G2-063: Claim: the quantum component is the key novelty and drives the gains. Evidence: the ablation shows removing it changes the score by 0.08% (the reported seed noise is +/-0.3%).
+G2-067: Claim: this technique is established prior art we build on. Evidence: we cite 'Zhang & Lee, Neural Beam Prediction for LEO, IEEE TWC 2021, DOI 10.1109/TWC.2021.3098123'.
+G2-068: Claim: this technique is established prior art we build on. Evidence: we cite 'Park, Choi & Ryu, Doppler-Aware Handover for NGSO, IEEE TVT 2022, DOI 10.1109/TVT.2022.3156789'.
+G2-069: Claim: this technique is established prior art we build on. Evidence: we cite 'Ivanov & Sato, Federated Beam Scheduling, IEEE JSAC 2023, DOI 10.1109/JSAC.2023.3271044'.
+G2-070: Claim: this technique is established prior art we build on. Evidence: we cite 'Mehta, Oh & Fernandez, Adaptive Link Control for Mega-Constellations, IEEE TCOM 2022, DOI 10.1109/TCOM.2022.3188902'.
+G2-071: Claim: this technique is established prior art we build on. Evidence: we cite 'Zhang & Lee, Neural Beam Prediction for LEO, IEEE TWC 2021, DOI 10.1109/TWC.2021.3098123'.
+G2-072: Claim: this technique is established prior art we build on. Evidence: we cite 'Mehta, Oh & Fernandez, Adaptive Link Control for Mega-Constellations, IEEE TCOM 2022, DOI 10.1109/TCOM.2022.3188902'.
+G2-001: Claim: the request meets its 60 ms latency budget. Evidence: the pipeline stages take 15 ms, 9 ms, 18 ms.
+G2-002: Claim: our policy is robust to jamming. Evidence: Table 5 reports performance under three jamming intensities (light, moderate, severe), with graceful degradation at each.
+G2-003: Claim: the request meets its 80 ms latency budget. Evidence: the pipeline stages take 22 ms, 23 ms, 18 ms.
+G2-004: Claim: our policy is robust to jamming. Evidence: Table 5 reports performance under three jamming intensities (light, moderate, severe), with graceful degradation at each.
+G2-005: Claim: the 4 flows fit within the shared link. Evidence: they are allocated 0.26, 0.3, 0.17, 0.19 of a link with normalized capacity 1.0.
+G2-006: Claim: the 3 flows fit within the shared link. Evidence: they are allocated 0.29, 0.15, 0.27 of a link with normalized capacity 1.0.
+G2-007: Claim: the attention module is a key driver of performance. Evidence: the ablation table shows removing it drops the score by 6.9% (well beyond the +/-0.3% seed noise).
+G2-008: Claim: our method significantly outperforms the baseline. Evidence: score 0.783 +/- 0.01 (ours) vs 0.681 +/- 0.01 (baseline) over 10 seeds; the intervals do not overlap.
+G2-009: Claim: this technique is established prior art we build on. Evidence: we cite 'Vaswani et al., Attention Is All You Need, NeurIPS 2017, DOI 10.48550/arXiv.1706.03762'.
+G2-010: Claim: this technique is established prior art we build on. Evidence: we cite 'He et al., Deep Residual Learning, CVPR 2016, DOI 10.1109/CVPR.2016.90'.
+G2-011: Claim: our method performs comparably to the baseline (we do NOT claim superiority). Evidence: score 0.821 +/- 0.022 (ours) vs 0.825 +/- 0.022 (baseline) over 10 seeds; intervals overlap.
+G2-012: Claim: this technique is established prior art we build on. Evidence: we cite 'He et al., Deep Residual Learning, CVPR 2016, DOI 10.1109/CVPR.2016.90'.
+G2-013: Claim: our method performs comparably to the baseline (we do NOT claim superiority). Evidence: score 0.835 +/- 0.026 (ours) vs 0.83 +/- 0.026 (baseline) over 10 seeds; intervals overlap.
+G2-014: Claim: the attention module is a key driver of performance. Evidence: the ablation table shows removing it drops the score by 9.6% (well beyond the +/-0.3% seed noise).
+G2-015: Claim: the request meets its 60 ms latency budget. Evidence: the pipeline stages take 10 ms, 13 ms, 18 ms.
+G2-016: Claim: the attention module is a key driver of performance. Evidence: the ablation table shows removing it drops the score by 10.0% (well beyond the +/-0.3% seed noise).
+G2-017: Claim: this technique is established prior art we build on. Evidence: we cite 'Vaswani et al., Attention Is All You Need, NeurIPS 2017, DOI 10.48550/arXiv.1706.03762'.
+G2-018: Claim: the 4 flows fit within the shared link. Evidence: they are allocated 0.15, 0.13, 0.19, 0.18 of a link with normalized capacity 1.0.

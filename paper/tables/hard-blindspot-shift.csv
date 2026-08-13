@@ -1,0 +1,4 @@
+run,n_missed,dominant_missed_class,n_false_reject
+h-haiku-r1-20260813.txt,9,empty-filter,0
+h-haiku-r2-20260813.txt,6,selection-regression,3
+h-haiku-r3-20260813.txt,6,selection-regression,0

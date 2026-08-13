@@ -1,0 +1,4 @@
+checker,seed_judge,heldout_judge,heldout_citation
+strict,1.0000,1.0000,1.0000
+moderate,0.6000,0.5333,0.0000
+lenient,0.4000,0.4333,0.0000

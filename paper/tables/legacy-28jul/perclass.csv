@@ -1,0 +1,6 @@
+class,ATTEST_fp,noPC_fp,n
+infeasible,0,10,12
+overlapping-ci-superiority,0,0,6
+scope-gap,0,0,6
+antithetical-ablation,0,0,6
+fabricated-citation,0,0,6
