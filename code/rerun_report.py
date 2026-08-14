@@ -248,6 +248,57 @@ def modes():
           "mode_low", "mode_high", "n_distinct_values"], out)
     return rows
 
+def paired_selfreview():
+    """ATTEST vs producer self-review on corpus 1, paired at the artifact level.
+
+    Why this is reported next to the 53.3% figure rather than instead of it. With three runs per
+    condition the RATE is barely estimable: a per-run rate of 0.53 with a range of 0.00-0.80 carries
+    an interval so wide that a reader is right to discount it. But the EXISTENCE of the effect is a
+    different question, and the design answers it far better than the rate does, because both
+    configurations see the same artifacts in the same run under the same checker verdicts. Confusing
+    "we cannot measure the size precisely" with "we have not shown the effect" would understate this
+    result exactly as badly as quoting 53.3% alone would overstate its precision.
+    """
+    from math import comb
+    CORPUS, JUDGE_CLASSES = C2.CORPUS, C2.JUDGE_CLASSES
+    GT = {a["id"]: a["ground_truth"] for a in CORPUS}
+    seed = [a["id"] for a in CORPUS if a["is_seed"]]
+    ej = [a for a in CORPUS if not a["is_seed"] and a["defect_class"] in JUDGE_CLASSES]
+    pool = ["strict", "moderate", "lenient", "lenient"]
+    names = [f"{m}{i}" for i, m in enumerate(pool)]
+    n2t = dict(zip(names, pool))
+    a_blocks = b_blocks = 0
+    n_runs = min(len(G2_RUNS[t]) for t in set(pool))
+    for r in range(n_runs):
+        V = {t: r2(G2_RUNS[t][r]) for t in set(pool)}
+        sd = {}
+        for n in names:
+            d = [i for i in seed if GT[i] == "FAIL" and i in V[n2t[n]]]
+            sd[n] = sum(1 for i in d if V[n2t[n]][i] == "FAIL") / len(d) if d else 0.0
+        for art in ej:
+            v = {n: V[n2t[n]].get(art["id"], "PASS") for n in names}
+            dec = V["lenient"].get(art["id"], "PASS")
+            a = gate_decision(art, v, sd, CONFIGS()["ATTEST"], 0.6, dec)
+            b = gate_decision(art, v, sd, CONFIGS()["b_i_self_review"], 0.6, dec)
+            if a != b:
+                if a == "FAIL":
+                    a_blocks += 1
+                else:
+                    b_blocks += 1
+    n = a_blocks + b_blocks
+    k = min(a_blocks, b_blocks)
+    p = 1.0 if n == 0 else min(1.0, 2 * sum(comb(n, i) for i in range(k + 1)) / 2 ** n)
+    wcsv("rerun-paired.csv", ["comparison", "quantity", "value"], [
+        ["ATTEST_vs_self_review", "discordant_attest_blocks", a_blocks],
+        ["ATTEST_vs_self_review", "discordant_other_blocks", b_blocks],
+        ["ATTEST_vs_self_review", "discordant_total", n],
+        ["ATTEST_vs_self_review", "p_two_sided", f"{p:.2e}"],
+        ["ATTEST_vs_self_review", "n_runs", n_runs],
+        ["ATTEST_vs_self_review", "n_eval_artifacts", len(ej)],
+    ])
+    return a_blocks, b_blocks, p
+
+
 def main():
     print("rerun_report -- reading from raw/, emitting CSVs as ranges\n")
     per_checker(G2_RUNS, r2, "g2")
@@ -256,6 +307,9 @@ def main():
     gate_matrix(G2_RUNS, ["strict", "moderate", "lenient", "lenient"], 0.6, "g2", "lenient")
     gate_matrix(G3_RUNS, ["opus", "haiku", "haiku", "haiku"], 0.85, "g3", "haiku")
     modes()
+    ab, bb, pv = paired_selfreview()
+    print(f"    [paired] ATTEST vs self-review: {ab} discordant one way, {bb} the "
+          f"other, two-sided p = {pv:.2e}")
     print("\ndone. Every cell carries mean/min/max/n_runs; no cell carries mean alone.")
 
 

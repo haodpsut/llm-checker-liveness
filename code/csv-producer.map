@@ -10,3 +10,4 @@ hard-corpus.csv=h_score.py
 hard-blindspot-shift.csv=h_score.py
 hard-matrix.csv=h_matrix.py
 hard-paired.csv=h_matrix.py
+rerun-paired.csv=rerun_report.py

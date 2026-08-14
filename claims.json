@@ -620,5 +620,28 @@
    "condition": "strict_falsereject_mode"
   },
   "agg": "value"
+ },
+ {
+  "id": "selfreview_paired_disc",
+  "paper_value": "48",
+  "csv": "tables/rerun-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "ATTEST_vs_self_review",
+   "quantity": "discordant_total"
+  },
+  "agg": "value",
+  "note": "the self-review effect is decisive when analysed paired, even though its RATE is not"
+ },
+ {
+  "id": "selfreview_paired_other",
+  "paper_value": "0",
+  "csv": "tables/rerun-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "ATTEST_vs_self_review",
+   "quantity": "discordant_other_blocks"
+  },
+  "agg": "value"
  }
 ]

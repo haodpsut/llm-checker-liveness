@@ -46,6 +46,7 @@ MAP = {
     "rerun-g2-matrix.csv": (TBL, "rerun_report.py", RAW_G2),
     "rerun-g3-matrix.csv": (TBL, "rerun_report.py", RAW_G3),
     "rerun-modes.csv":     (TBL, "rerun_report.py", RAW_G2 + RAW_G4),
+    "rerun-paired.csv":    (TBL, "rerun_report.py", RAW_G2),
     "hard-corpus.csv":          (TBL, "h_score.py", RAW_H),
     "hard-blindspot-shift.csv": (TBL, "h_score.py", RAW_H),
     "hard-matrix.csv":          (TBL, "h_matrix.py", RAW_H),
