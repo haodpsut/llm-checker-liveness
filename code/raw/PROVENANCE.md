@@ -3,7 +3,7 @@
 Derived by `code/provenance.py` from the orchestration log that launched the checker
 runs. Not hand-transcribed. The log is a full working session and is not released.
 
-**65 checker launches** recorded; **58 raw logs** in this directory.
+**65 checker launches** recorded; **76 raw logs** in this directory.
 The two counts differ because pilot launches that were superseded, and launches whose
 output was folded into an existing file, did not each produce a new file. The raw logs
 are the data; this table is the condition they were produced under.
@@ -30,7 +30,19 @@ the leading instruction differs.
 
 ## Run dates
 
-Taken from the raw filenames: 20260813.
+Taken from the raw filenames: 20260813, 20260814.
+
+## Second model family (direct API calls)
+
+Read from the header each runner wrote into its own log, not reconstructed. These
+runs record the sampling temperature that the first arm could not.
+
+| model | temperature | date | runs |
+|---|---|---|---|
+| `gemini-3.1-flash-lite` | 1.0 | 20260814 | 3 |
+| `gemini-3.5-flash` | 1.0 | 20260814 | 5 |
+| `gemini-3.5-flash-lite` | 0.0 | 20260814 | 5 |
+| `gemini-3.5-flash-lite` | 1.0 | 20260814 | 5 |
 
 ## Not recorded, and therefore not reported
 

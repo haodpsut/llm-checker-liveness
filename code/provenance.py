@@ -135,6 +135,28 @@ def main():
     dates = sorted({m.group(1) for f in os.listdir(RAW)
                     for m in [re.search(r"(\d{8})\.txt$", f)] if m})
     L.append("Taken from the raw filenames: " + ", ".join(dates) + ".\n")
+    # Second family. Its provenance does NOT come from the orchestration log, because those runs
+    # were direct API calls rather than agent launches. It comes from headers the runner wrote into
+    # each log at call time, which is strictly better evidence: it records what the call actually
+    # asked for, including the temperature the first arm could not record at all.
+    import glob
+    heads = {}
+    for f in sorted(glob.glob(os.path.join(RAW, "h-*T*-r*.txt"))):
+        with open(f, encoding="utf-8") as fh:
+            first = fh.readline().strip()
+        m = re.match(r"# model=(\S+) temperature=(\S+) date=(\S+)", first)
+        if m:
+            heads.setdefault((m.group(1), m.group(2), m.group(3)), []).append(os.path.basename(f))
+    if heads:
+        L.append("## Second model family (direct API calls)\n")
+        L.append("Read from the header each runner wrote into its own log, not reconstructed. These")
+        L.append("runs record the sampling temperature that the first arm could not.\n")
+        L.append("| model | temperature | date | runs |")
+        L.append("|---|---|---|---|")
+        for (mo, te, da), fs in sorted(heads.items()):
+            L.append(f"| `{mo}` | {te} | {da} | {len(fs)} |")
+        L.append("")
+
     L.append("## Not recorded, and therefore not reported\n")
     L.append("* **Temperature and top-p.** The orchestration interface exposes no sampling")
     L.append("  parameters. Every run used the harness default and no run varied it, so run-to-run")

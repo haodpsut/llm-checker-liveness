@@ -64,6 +64,9 @@ NEEDS_ARGS = {
     "code/raw/_from_faillist.py": "takes an output file and a fail list.",
     "code/raw/_write_raw.py": "takes an output file and the IDs to write.",
     "paper/style/measure_plot.py": "takes the PDF to measure.",
+    "code/run_gemini_checker.py":
+        "takes --tier and reads GEMINI_API_KEY from the environment. It refuses without --tier on "
+        "purpose: two models writing the same filenames would silently overwrite each other.",
 }
 
 TIMEOUT = 180

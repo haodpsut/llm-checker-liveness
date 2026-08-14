@@ -14,7 +14,8 @@
     "rerun-g3.csv:mean": "as above, checker level rather than configuration level.",
     "rerun-g4.csv:mean": "different corpus (28 reasoning artifacts); not directly comparable to the configuration matrix.",
     "hard-corpus.csv:mean": "second corpus, different artifacts and different classes; not comparable to the first-corpus configuration matrix.",
-    "hard-matrix.csv:max": "second corpus. It does contain a 1.00 for no-verification, i.e. the same configuration wins there too, but the artifacts and classes differ so it is not pooled into this first-corpus maximum. Named here so the reader can see the agreement rather than infer it."
+    "hard-matrix.csv:max": "second corpus. It does contain a 1.00 for no-verification, i.e. the same configuration wins there too, but the artifacts and classes differ so it is not pooled into this first-corpus maximum. Named here so the reader can see the agreement rather than infer it.",
+    "hard-matrix.csv:mean": "second corpus. no-verification reaches 1.00 there too, so the same configuration is worst in both, but the artifacts and defect classes differ and the two are not pooled into one maximum. Named so the agreement is visible rather than inferred."
    }
   },
   {
@@ -30,7 +31,8 @@
     "rerun-g2-matrix.csv:max": "gate-configuration level, not checker level.",
     "rerun-g3-matrix.csv:max": "as above.",
     "hard-corpus.csv:max": "second corpus; the sentence is about the lenient prompt on the first corpus.",
-    "hard-matrix.csv:max": "gate-configuration level on the SECOND corpus, and a false-pass rate rather than a detection rate. The sentence is about one checker's detection on the first corpus, so this column measures neither the same thing nor the same corpus."
+    "hard-matrix.csv:max": "gate-configuration level on the SECOND corpus, and a false-pass rate rather than a detection rate. The sentence is about one checker's detection on the first corpus, so this column measures neither the same thing nor the same corpus.",
+    "hard-matrix.csv:mean": "gate-configuration level on the second corpus, and a false-pass rate rather than a detection rate. The sentence is about one checker's detection on the first corpus."
    }
   }
  ],

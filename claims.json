@@ -643,5 +643,24 @@
    "quantity": "discordant_other_blocks"
   },
   "agg": "value"
+ },
+ {
+  "id": "crossfam_cells",
+  "paper_value": "135",
+  "csv": "tables/hard-crossfamily.csv",
+  "column": "run",
+  "agg": "count",
+  "note": "checker x class x run cells across two model families"
+ },
+ {
+  "id": "crossfam_extremal",
+  "paper_value": "129",
+  "csv": "tables/hard-crossfamily.csv",
+  "column": "run",
+  "filter": {
+   "extremal": "yes"
+  },
+  "agg": "count",
+  "note": "cells at exactly 0 or exactly 1: competence is class-shaped, not instance-shaped"
  }
 ]

@@ -32,6 +32,12 @@ RAW_G2 = [f"raw/{n}" for n in ["g2-strict-20260813.txt","g2-strict-b-20260813.tx
 RAW_G3 = [f"raw/g3-{t}-r{i}-20260813.txt" for t in ("opus","sonnet","haiku") for i in (1,2,3)]
 RAW_G4 = [f"raw/g4-{t}-s{i}-20260813.txt" for t in ("opus","sonnet","haiku") for i in (1,2,3)]
 RAW_H  = [f"raw/h-{t}-r{i}-20260813.txt" for t in ("opus","sonnet","haiku") for i in (1,2,3)]
+# Second model family, added 14/08/2026. Listed explicitly for the same reason as the Claude runs:
+# a CSV must be newer than every log it consumes, and a glob would silently absorb a new arm.
+RAW_GEM = ([f"raw/h-gfliteT10-r{i}-20260814.txt" for i in range(1, 6)]
+           + [f"raw/h-gfliteT00-r{i}-20260814.txt" for i in range(1, 6)]
+           + [f"raw/h-gflashT10-r{i}-20260814.txt" for i in range(1, 6)]
+           + [f"raw/h-g31liteT10-r{i}-20260814.txt" for i in range(1, 4)])
 
 MAP = {
     "compose.csv":    (TBL,  "corpus_tables.py",      []),
@@ -47,8 +53,9 @@ MAP = {
     "rerun-g3-matrix.csv": (TBL, "rerun_report.py", RAW_G3),
     "rerun-modes.csv":     (TBL, "rerun_report.py", RAW_G2 + RAW_G4),
     "rerun-paired.csv":    (TBL, "rerun_report.py", RAW_G2),
-    "hard-corpus.csv":          (TBL, "h_score.py", RAW_H),
+    "hard-corpus.csv":          (TBL, "h_score.py", RAW_H + RAW_GEM),
     "hard-blindspot-shift.csv": (TBL, "h_score.py", RAW_H),
+    "hard-crossfamily.csv":     (TBL, "h_score.py", RAW_H + RAW_GEM),
     "hard-matrix.csv":          (TBL, "h_matrix.py", RAW_H),
     "hard-paired.csv":          (TBL, "h_matrix.py", RAW_H),
 }

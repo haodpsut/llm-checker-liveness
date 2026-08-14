@@ -11,3 +11,5 @@ hard-blindspot-shift.csv=h_score.py
 hard-matrix.csv=h_matrix.py
 hard-paired.csv=h_matrix.py
 rerun-paired.csv=rerun_report.py
+hard-crossfamily.csv=h_score.py
+fig-crossfamily.tex=fig_crossfamily.py
