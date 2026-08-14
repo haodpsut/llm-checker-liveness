@@ -97,10 +97,16 @@ def main():
         print("BLOCK: found 0 python scripts. Empty is broken, not clean.")
         return 2
 
-    # A declaration naming a file that no longer exists is a stale exemption, and a stale exemption
-    # is how a real failure gets waved through later.
-    ghosts = sorted((set(FROZEN) | set(NEEDS_ARGS)) - set(files))
-    problems = [f"declared but not shipped: {g}" for g in ghosts]
+    # A declaration naming a file that no longer EXISTS is a stale exemption, and a stale exemption
+    # is how a real failure gets waved through later. The test is presence on disk, not presence in
+    # the shipped list: the published repository ships a subset of the working tree (it omits
+    # paper/figs and paper/style), so a declaration can be legitimately inert in one checkout and
+    # active in another. Keying this on the shipped list instead made every clone of the artifact
+    # report three stale exemptions that were neither stale nor exemptions.
+    ghosts = sorted(d for d in (set(FROZEN) | set(NEEDS_ARGS))
+                    if not os.path.exists(os.path.join(ROOT, d)))
+    problems = [f"declared but the file does not exist: {g}" for g in ghosts]
+    inert = sorted((set(FROZEN) | set(NEEDS_ARGS)) - set(files) - set(ghosts))
 
     ran = usage = frozen = 0
     print(f"check_scripts_run -- {len(files)} shipped script(s)\n")
@@ -135,6 +141,10 @@ def main():
 
     print(f"\n  ran clean: {ran}   refused with usage: {usage}   declared frozen: {frozen}   "
           f"unaccounted: {len(problems)}")
+    if inert:
+        print(f"  declarations inert in this checkout (file present, not shipped here): {len(inert)}")
+        for i in inert:
+            print(f"      {i}")
     if problems:
         print("\nBLOCK -- every shipped script must run, refuse clearly, or be declared dead:")
         for p in problems:
