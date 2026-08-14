@@ -97,16 +97,18 @@ def main():
         print("BLOCK: found 0 python scripts. Empty is broken, not clean.")
         return 2
 
-    # A declaration naming a file that no longer EXISTS is a stale exemption, and a stale exemption
-    # is how a real failure gets waved through later. The test is presence on disk, not presence in
-    # the shipped list: the published repository ships a subset of the working tree (it omits
-    # paper/figs and paper/style), so a declaration can be legitimately inert in one checkout and
-    # active in another. Keying this on the shipped list instead made every clone of the artifact
-    # report three stale exemptions that were neither stale nor exemptions.
-    ghosts = sorted(d for d in (set(FROZEN) | set(NEEDS_ARGS))
-                    if not os.path.exists(os.path.join(ROOT, d)))
-    problems = [f"declared but the file does not exist: {g}" for g in ghosts]
-    inert = sorted((set(FROZEN) | set(NEEDS_ARGS)) - set(files) - set(ghosts))
+    # A declaration for a file this checkout does not contain is INERT, not a fault, and must not
+    # block. The published repository ships a subset of the working tree (no paper/figs, no
+    # paper/style), so the same declaration list is partly active in the authoring tree and partly
+    # dormant in a clone. Two earlier versions of this check got that wrong in opposite directions:
+    # first it blocked on "declared but not shipped", then on "declared but absent", and each time
+    # every clone of the artifact reported faults that were neither stale nor exemptions. A gate
+    # that cries wolf on a correct checkout is the one people learn to skip.
+    #
+    # What this gate is actually for is unchanged and unweakened: a script that IS present must run,
+    # refuse with a usage line, or be declared dead. Nothing below can be silenced by a declaration.
+    inert = sorted((set(FROZEN) | set(NEEDS_ARGS)) - set(files))
+    problems = []
 
     ran = usage = frozen = 0
     print(f"check_scripts_run -- {len(files)} shipped script(s)\n")
@@ -142,7 +144,7 @@ def main():
     print(f"\n  ran clean: {ran}   refused with usage: {usage}   declared frozen: {frozen}   "
           f"unaccounted: {len(problems)}")
     if inert:
-        print(f"  declarations inert in this checkout (file present, not shipped here): {len(inert)}")
+        print(f"  declarations inert in this checkout (not part of it): {len(inert)}")
         for i in inert:
             print(f"      {i}")
     if problems:
