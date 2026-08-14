@@ -29,11 +29,14 @@ LABEL = {"opus": "A: strong", "sonnet": "A: mid", "haiku": "A: cheap",
          "gflashT10": "B: flash", "g31liteT10": "B: lite (prev)",
          "gfliteT10": r"B: lite, $T{=}1$", "gfliteT00": r"B: lite, $T{=}0$"}
 ORDER = ["opus", "sonnet", "haiku", "gflashT10", "g31liteT10", "gfliteT10", "gfliteT00"]
-SHORT = {"subset-superlative": "subset\\\\superlative",
-         "mechanism-vs-decomposition": "mechanism vs\\\\decomposition",
-         "false-exclusivity": "false\\\\exclusivity",
-         "empty-filter": "empty\\\\filter",
-         "selection-regression": "selection\\\\regression"}
+# Row labels are what set the figure's width, and the long ones pushed it 14pt past the column
+# without LaTeX erroring (only an Overfull \hbox nobody was reading). Short forms; the caption
+# spells out what each abbreviates.
+SHORT = {"subset-superlative": "subset sup.",
+         "mechanism-vs-decomposition": "mechanism",
+         "false-exclusivity": "exclusivity",
+         "empty-filter": "empty filter",
+         "selection-regression": "selection"}
 
 
 def main():
@@ -58,7 +61,7 @@ def main():
     #   solid  detected every instance, in every run
     #   empty  detected none, in every run
     #   half   disagreed between runs (the rare case, and the one worth seeing)
-    CW, RH, g = 7.6, 6.4, 3.4
+    CW, RH, g = 7.2, 6.2, 3.3
     SHORTCK = {"opus": "A str", "sonnet": "A mid", "haiku": "A chp", "gflashT10": "B fl",
                "g31liteT10": "B lt$'$", "gfliteT10": "B lt$_1$", "gfliteT00": "B lt$_0$"}
     L = []
