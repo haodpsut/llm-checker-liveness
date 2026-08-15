@@ -1,8 +1,10 @@
 comparison,quantity,value
-ATTEST_vs_no_poscontrol,discordant_attest_blocks,14
-ATTEST_vs_no_poscontrol,discordant_other_blocks,0
-ATTEST_vs_no_poscontrol,discordant_total,14
-ATTEST_vs_no_poscontrol,p_two_sided,0.000122
+ATTEST_vs_no_poscontrol,discordant_artifacts_attest_blocks,10
+ATTEST_vs_no_poscontrol,discordant_artifacts_other_blocks,0
+ATTEST_vs_no_poscontrol,discordant_artifacts_mixed,0
+ATTEST_vs_no_poscontrol,discordant_total,10
+ATTEST_vs_no_poscontrol,unit_of_analysis,artifact
+ATTEST_vs_no_poscontrol,p_two_sided,0.001953
 fp_judge_0_of_30,ci_lo,0.0000
 fp_judge_0_of_30,ci_hi,0.1157
 fp_judge_4_of_30,ci_lo,0.0376

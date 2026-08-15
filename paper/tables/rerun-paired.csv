@@ -1,7 +1,9 @@
 comparison,quantity,value
-ATTEST_vs_self_review,discordant_attest_blocks,48
-ATTEST_vs_self_review,discordant_other_blocks,0
-ATTEST_vs_self_review,discordant_total,48
-ATTEST_vs_self_review,p_two_sided,7.11e-15
+ATTEST_vs_self_review,discordant_artifacts_attest_blocks,24
+ATTEST_vs_self_review,discordant_artifacts_other_blocks,0
+ATTEST_vs_self_review,discordant_artifacts_mixed,0
+ATTEST_vs_self_review,discordant_total,24
+ATTEST_vs_self_review,unit_of_analysis,artifact
+ATTEST_vs_self_review,p_two_sided,1.19e-07
 ATTEST_vs_self_review,n_runs,3
 ATTEST_vs_self_review,n_eval_artifacts,30

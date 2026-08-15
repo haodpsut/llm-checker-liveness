@@ -1,4 +1,4 @@
-# Checker liveness: two defect benchmarks, a fail-closed gate, and 58 raw checker logs
+# Checker liveness: two defect benchmarks, a fail-closed gate, and 76 raw checker logs
 
 This is the artifact for a measurement study of **positive-control liveness**: the idea that a
 verification gate should emit PASS only while its checkers keep catching a pool of seeded defects.
@@ -51,7 +51,7 @@ code/
   provenance.py           derives raw/PROVENANCE.md from the orchestration log
   check_freshness.py      every CSV must be newer than its producer and its raw data
   csv-producer.map        which script produces which CSV
-  raw/                    58 raw checker logs + RUN-LOG.md + PROVENANCE.md
+  raw/                    76 raw checker logs + RUN-LOG.md + PROVENANCE.md
 paper/
   tables/                 every CSV the paper cites
   tables/legacy-28jul/    an earlier, retired measurement set, kept for comparison

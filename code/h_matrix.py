@@ -125,7 +125,14 @@ def paired_test(pool, tau, mode, by_tier, a="ATTEST", b="b_iii_no_poscontrol"):
     names = [f"{m}{i}" for i, m in enumerate(pool)]
     n2t = dict(zip(names, pool))
     score = seed_detect_pooled if mode == "pooled" else seed_detect_per_class
-    a_blocks = b_blocks = 0
+
+    # CLUSTER BY ARTIFACT. An earlier version counted every (artifact, run) disagreement as an
+    # independent pair and ran a sign test over all of them, giving p = 1.2e-4. That is
+    # pseudo-replication: the SAME 30 artifacts recur in all three runs, so the pairs share both
+    # the artifact and the run and are not i.i.d. An external reviewer caught it. The unit that is
+    # actually independent here is the ARTIFACT, so each artifact contributes one vote: which way,
+    # if any, the two configurations disagreed about it.
+    per_art = {}
     for r in range(min(len(by_tier[t]) for t in set(pool))):
         V = {t: read(by_tier[t][r]) for t in set(pool)}
         sd = {n: score(V[n2t[n]]) for n in names}
@@ -135,14 +142,15 @@ def paired_test(pool, tau, mode, by_tier, a="ATTEST", b="b_iii_no_poscontrol"):
             db = gate_decision(art, v, sd, CONFIGS()[b], tau, V[pool[-1]][art["id"]])
             if da == db:
                 continue
-            if da == "FAIL":
-                a_blocks += 1
-            else:
-                b_blocks += 1
+            cell = per_art.setdefault(art["id"], [0, 0])
+            cell[0 if da == "FAIL" else 1] += 1
+    a_blocks = sum(1 for c in per_art.values() if c[0] and not c[1])
+    b_blocks = sum(1 for c in per_art.values() if c[1] and not c[0])
+    mixed = sum(1 for c in per_art.values() if c[0] and c[1])
     n = a_blocks + b_blocks
     k = min(a_blocks, b_blocks)
     p = 1.0 if n == 0 else min(1.0, 2 * sum(comb(n, i) for i in range(k + 1)) / 2 ** n)
-    return a_blocks, b_blocks, n, p
+    return a_blocks, b_blocks, n, p, mixed
 
 
 def clopper_pearson(k, n, alpha=0.05):
@@ -198,10 +206,12 @@ def main():
     # --- paired test + exact intervals, emitted so the prose can cite a CSV cell -------------
     lo0, hi0 = clopper_pearson(0, len(EVAL))
     assert abs(hi0 - 0.1157) < 1e-3, f"clopper_pearson self-check failed: 0/30 -> {hi0}"
-    ab, bb, nd, pv = paired_test(pools["strong-first"], 0.90, "per-class", by_tier)
-    rows = [["ATTEST_vs_no_poscontrol", "discordant_attest_blocks", ab],
-            ["ATTEST_vs_no_poscontrol", "discordant_other_blocks", bb],
+    ab, bb, nd, pv, mx = paired_test(pools["strong-first"], 0.90, "per-class", by_tier)
+    rows = [["ATTEST_vs_no_poscontrol", "discordant_artifacts_attest_blocks", ab],
+            ["ATTEST_vs_no_poscontrol", "discordant_artifacts_other_blocks", bb],
+            ["ATTEST_vs_no_poscontrol", "discordant_artifacts_mixed", mx],
             ["ATTEST_vs_no_poscontrol", "discordant_total", nd],
+            ["ATTEST_vs_no_poscontrol", "unit_of_analysis", "artifact"],
             ["ATTEST_vs_no_poscontrol", "p_two_sided", f"{pv:.6f}"]]
     for k in (0, 4, 6):
         lo, hi = clopper_pearson(k, len(EVAL))
@@ -211,8 +221,8 @@ def main():
         w = csv.writer(f)
         w.writerow(["comparison", "quantity", "value"])
         w.writerows(rows)
-    print(f"\n  wrote hard-paired.csv: {nd} discordant artifacts, "
-          f"{ab} one way and {bb} the other, two-sided p = {pv:.2e}")
+    print(f"\n  wrote hard-paired.csv: {nd} discordant ARTIFACTS ({ab} one way, {bb} the other, "
+          f"{mx} mixed), sign test clustered by artifact, two-sided p = {pv:.4f}")
 
     print(f"\n{'pool':13s} {'config':24s} {'fp_judge':>14s} {'ff_clean':>14s}   (per-class tau=0.90)")
     for pname in pools:

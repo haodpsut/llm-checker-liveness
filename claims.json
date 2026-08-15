@@ -457,7 +457,7 @@
  },
  {
   "id": "paired_discordant",
-  "paper_value": "14",
+  "paper_value": "10",
   "csv": "tables/hard-paired.csv",
   "column": "value",
   "filter": {
@@ -474,14 +474,14 @@
   "column": "value",
   "filter": {
    "comparison": "ATTEST_vs_no_poscontrol",
-   "quantity": "discordant_other_blocks"
+   "quantity": "discordant_artifacts_other_blocks"
   },
   "agg": "value",
   "note": "none of the discordant pairs runs the other way"
  },
  {
   "id": "paired_p",
-  "paper_value": "0.000122",
+  "paper_value": "0.001953",
   "csv": "tables/hard-paired.csv",
   "column": "value",
   "filter": {
@@ -623,7 +623,7 @@
  },
  {
   "id": "selfreview_paired_disc",
-  "paper_value": "48",
+  "paper_value": "24",
   "csv": "tables/rerun-paired.csv",
   "column": "value",
   "filter": {
@@ -640,7 +640,7 @@
   "column": "value",
   "filter": {
    "comparison": "ATTEST_vs_self_review",
-   "quantity": "discordant_other_blocks"
+   "quantity": "discordant_artifacts_other_blocks"
   },
   "agg": "value"
  },
@@ -662,5 +662,41 @@
   },
   "agg": "count",
   "note": "cells at exactly 0 or exactly 1: competence is class-shaped, not instance-shaped"
+ },
+ {
+  "id": "poolorder_g3_singlejudge_sf",
+  "paper_value": "0",
+  "csv": "tables/rerun-g3-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "pool_order": "strong-first",
+   "config": "single LLM-judge",
+   "metric": "fp_judge"
+  },
+  "agg": "value",
+  "note": "tren benchmark bao hoa, thu tu pool khong doi mot o nao"
+ },
+ {
+  "id": "poolorder_g3_singlejudge_wf",
+  "paper_value": "0",
+  "csv": "tables/rerun-g3-matrix.csv",
+  "column": "mean",
+  "filter": {
+   "pool_order": "weak-first",
+   "config": "single LLM-judge",
+   "metric": "fp_judge"
+  },
+  "agg": "value"
+ },
+ {
+  "id": "corpus1_defective",
+  "paper_value": "54",
+  "csv": "tables/corpus.csv",
+  "column": "n",
+  "filter": {
+   "quantity": "defective"
+  },
+  "agg": "value",
+  "note": "mat can bang lop: 54 tren 72"
  }
 ]

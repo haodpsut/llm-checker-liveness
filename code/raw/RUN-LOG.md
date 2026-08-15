@@ -18,8 +18,11 @@ no verdict: nothing inferred, filled in, or rounded.
 
 ## Scale
 
-**58 logged runs.** First corpus: 24 prompt-rigour runs, 9 model-tier runs, 16 reasoning-class runs.
-Second (hard) corpus: 9 runs.
+**76 logged runs.** First campaign, 13/08/2026, one model family, **58 runs**: first corpus 24
+prompt-rigour, 9 model-tier, 16 reasoning-class; second (hard) corpus 9. Second campaign,
+14/08/2026, a **different vendor's family** on the hard corpus, **18 runs**: 5 + 5 + 3 at
+temperature 1 and 5 at temperature 0. Those 18 carry a header recording model and temperature,
+which the first 58 could not (see PROVENANCE.md).
 
 | | |
 |---|---|

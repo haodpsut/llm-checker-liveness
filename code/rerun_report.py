@@ -102,8 +102,15 @@ def per_checker(runs, reader, label):
     return rows
 
 
-def gate_matrix(runs, pool, tau, label, dec_source):
-    """The 8-configuration matrix, RECOMPUTED per run, then reported as a range."""
+def gate_matrix(runs, pool, tau, label, dec_source, order_name="strong-first"):
+    """The 8-configuration matrix, RECOMPUTED per run, then reported as a range.
+
+    POOL ORDER IS A PARAMETER, not an accident. The single-judge and single-checker ablations reduce
+    the pool to one member and take the FIRST, so whichever checker is written first silently
+    becomes the lone judge. Reporting only one ordering hands that baseline whichever checker the
+    author happened to list first. An external reviewer noted we admitted this for the second
+    benchmark but never re-ran the first, so every matrix is now emitted at BOTH orderings.
+    """
     names = [f"{m}{i}" for i, m in enumerate(pool)]
     n2r = dict(zip(names, pool))
     order = ["ATTEST", "b_iii_no_poscontrol", "b_v_no_honestneg", "b_vi_no_agreement",
@@ -137,8 +144,8 @@ def gate_matrix(runs, pool, tau, label, dec_source):
     for k in order:
         nm = CONFIGS()[k]["name"]
         for metric in ("fp_judge", "fp_dec", "ff_clean"):
-            rows.append([nm, metric] + band(per_run[k][metric]))
-    wcsv(f"rerun-{label}-matrix.csv", ["config", "metric"] + HDR, rows)
+            rows.append([order_name, nm, metric] + band(per_run[k][metric]))
+    return rows
 
 
 def g4_table():
@@ -267,7 +274,10 @@ def paired_selfreview():
     pool = ["strict", "moderate", "lenient", "lenient"]
     names = [f"{m}{i}" for i, m in enumerate(pool)]
     n2t = dict(zip(names, pool))
-    a_blocks = b_blocks = 0
+    # Clustered by ARTIFACT, not by (artifact, run) -- see the note in h_matrix.paired_test.
+    # Pooling every run-level disagreement gave p = 7e-15 by counting the same 30 artifacts three
+    # times over; the artifact is the independent unit.
+    per_art = {}
     n_runs = min(len(G2_RUNS[t]) for t in set(pool))
     for r in range(n_runs):
         V = {t: r2(G2_RUNS[t][r]) for t in set(pool)}
@@ -281,17 +291,20 @@ def paired_selfreview():
             a = gate_decision(art, v, sd, CONFIGS()["ATTEST"], 0.6, dec)
             b = gate_decision(art, v, sd, CONFIGS()["b_i_self_review"], 0.6, dec)
             if a != b:
-                if a == "FAIL":
-                    a_blocks += 1
-                else:
-                    b_blocks += 1
+                cell = per_art.setdefault(art["id"], [0, 0])
+                cell[0 if a == "FAIL" else 1] += 1
+    a_blocks = sum(1 for c in per_art.values() if c[0] and not c[1])
+    b_blocks = sum(1 for c in per_art.values() if c[1] and not c[0])
+    mixed = sum(1 for c in per_art.values() if c[0] and c[1])
     n = a_blocks + b_blocks
     k = min(a_blocks, b_blocks)
     p = 1.0 if n == 0 else min(1.0, 2 * sum(comb(n, i) for i in range(k + 1)) / 2 ** n)
     wcsv("rerun-paired.csv", ["comparison", "quantity", "value"], [
-        ["ATTEST_vs_self_review", "discordant_attest_blocks", a_blocks],
-        ["ATTEST_vs_self_review", "discordant_other_blocks", b_blocks],
+        ["ATTEST_vs_self_review", "discordant_artifacts_attest_blocks", a_blocks],
+        ["ATTEST_vs_self_review", "discordant_artifacts_other_blocks", b_blocks],
+        ["ATTEST_vs_self_review", "discordant_artifacts_mixed", mixed],
         ["ATTEST_vs_self_review", "discordant_total", n],
+        ["ATTEST_vs_self_review", "unit_of_analysis", "artifact"],
         ["ATTEST_vs_self_review", "p_two_sided", f"{p:.2e}"],
         ["ATTEST_vs_self_review", "n_runs", n_runs],
         ["ATTEST_vs_self_review", "n_eval_artifacts", len(ej)],
@@ -304,8 +317,14 @@ def main():
     per_checker(G2_RUNS, r2, "g2")
     per_checker(G3_RUNS, r2, "g3")
     g4_table()
-    gate_matrix(G2_RUNS, ["strict", "moderate", "lenient", "lenient"], 0.6, "g2", "lenient")
-    gate_matrix(G3_RUNS, ["opus", "haiku", "haiku", "haiku"], 0.85, "g3", "haiku")
+    # Both pool orderings for every matrix (EXP-S2-02).
+    for label, runs, tau, src, strong_first in (
+            ("g2", G2_RUNS, 0.6, "lenient", ["strict", "moderate", "lenient", "lenient"]),
+            ("g3", G3_RUNS, 0.85, "haiku", ["opus", "haiku", "haiku", "haiku"])):
+        weak_first = list(reversed(strong_first))
+        rows = (gate_matrix(runs, strong_first, tau, label, src, "strong-first")
+                + gate_matrix(runs, weak_first, tau, label, src, "weak-first"))
+        wcsv(f"rerun-{label}-matrix.csv", ["pool_order", "config", "metric"] + HDR, rows)
     modes()
     ab, bb, pv = paired_selfreview()
     print(f"    [paired] ATTEST vs self-review: {ab} discordant one way, {bb} the "
