@@ -698,5 +698,17 @@
   },
   "agg": "value",
   "note": "mat can bang lop: 54 tren 72"
+ },
+ {
+  "id": "selfreview_p_two_sided",
+  "paper_value": "1.19e-07",
+  "csv": "tables/rerun-paired.csv",
+  "column": "value",
+  "filter": {
+   "comparison": "ATTEST_vs_self_review",
+   "quantity": "p_two_sided"
+  },
+  "agg": "value",
+  "note": "p-value gom cum theo artifact; bai in 1.2e-7"
  }
 ]

@@ -16,7 +16,7 @@ log** in `code/raw/`.
 **The blind spot moves.** On the harder benchmark the cheap checker fails *systematically*, missing
 an entire defect class rather than scattered instances, which is the regime liveness screening
 exists for. But *which* class it is blind to changes between identical runs. See
-`paper/tables/hard-blindspot-shift.csv` and the three `code/raw/h-cheap-r*.txt` logs.
+`paper/tables/hard-blindspot-shift.csv` and the three `code/raw/h-haiku-r1..r3-20260813.txt` logs, the cheap tier on that benchmark.
 
 **A mechanism that never fires cannot be measured, and looks exactly like a mechanism that does not
 work.** Every internal gate passed the original null, because a filter that excludes nobody is
@@ -98,6 +98,19 @@ producer now emits the percentage columns alongside the fractions.
 through the launch interface, and the build behind two of the three model aliases was never echoed
 back. `raw/PROVENANCE.md` states both as unknown rather than filling them in, and the per-arm launch
 table is derived from the orchestration log rather than typed from memory.
+
+## What is deliberately not in here
+
+**The manuscript itself.** The paper is a separate claim surface and is under review, so its source
+is not redistributed here. Two of the four rules in `code/check_artifact_claims.py` read
+`paper/main.tex`; run in this repository they report themselves as NOT DISTRIBUTED and are excluded
+from the count of what was verified, rather than reported as a failure. Everything that backs a
+number in the paper is here.
+
+**`code/g2_verdicts.json.28jul-transcribed`** is kept on purpose and is read by nothing. It is the
+transcription of an earlier result set that encoded outcomes as range rules, which is the practice
+the Conventions section above says was removed. It is retained so that the change is inspectable
+rather than merely asserted.
 
 ## Known limits
 
