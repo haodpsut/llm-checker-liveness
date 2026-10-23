@@ -1,0 +1,5 @@
+ablation,error_direction,n_cells,n_worse,n_equal,n_better,worse_pct,equal_pct
+-honest-neg-block,false_pass,14,0,14,0,0.0,100.0
+-honest-neg-block,false_reject_clean,10,0,10,0,0.0,100.0
+-multichecker (single),false_pass,14,0,13,1,0.0,92.9
+-multichecker (single),false_reject_clean,10,3,4,3,30.0,40.0

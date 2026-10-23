@@ -710,5 +710,52 @@
   },
   "agg": "value",
   "note": "p-value gom cum theo artifact; bai in 1.2e-7"
+ },
+ {
+  "id": "honestneg_cells_identical",
+  "paper_value": "24",
+  "csv": "tables/ablation-nulls.csv",
+  "column": "n_equal",
+  "filter": {
+   "ablation": "-honest-neg-block"
+  },
+  "agg": "sum",
+  "note": "tong hai huong loi: 14 o false-pass + 10 o false-reject. Abstract tung ghi 18, khong khop bang nao"
+ },
+ {
+  "id": "multichecker_fp_cells_worse",
+  "paper_value": "0",
+  "csv": "tables/ablation-nulls.csv",
+  "column": "n_worse",
+  "filter": {
+   "ablation": "-multichecker (single)",
+   "error_direction": "false_pass"
+  },
+  "agg": "value",
+  "note": "mot checker KHONG BAO GIO lam tang false-pass, tren 14 o"
+ },
+ {
+  "id": "multichecker_ffclean_cells_worse",
+  "paper_value": "3",
+  "csv": "tables/ablation-nulls.csv",
+  "column": "n_worse",
+  "filter": {
+   "ablation": "-multichecker (single)",
+   "error_direction": "false_reject_clean"
+  },
+  "agg": "value",
+  "note": "nua bi bo sot: mot checker lam TANG tu choi sai bai sach o 3 trong 10 o"
+ },
+ {
+  "id": "multichecker_ffclean_cells_total",
+  "paper_value": "10",
+  "csv": "tables/ablation-nulls.csv",
+  "column": "n_cells",
+  "filter": {
+   "ablation": "-multichecker (single)",
+   "error_direction": "false_reject_clean"
+  },
+  "agg": "value",
+  "note": "mau so cua tuyen bo 3 tren 10"
  }
 ]

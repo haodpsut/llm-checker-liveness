@@ -58,6 +58,12 @@ MAP = {
     "hard-crossfamily.csv":     (TBL, "h_score.py", RAW_H + RAW_GEM),
     "hard-matrix.csv":          (TBL, "h_matrix.py", RAW_H),
     "hard-paired.csv":          (TBL, "h_matrix.py", RAW_H),
+    # Counts of cells in which an ablation differs from ATTEST. Its inputs are the three released
+    # ablation matrices, which are themselves outputs, so the chain is matrices -> this file; the
+    # gate still reaches the raw logs through the freshness of those matrices.
+    "ablation-nulls.csv":       (TBL, "ablation_nulls.py",
+                                 [os.path.join(TBL, n) for n in
+                                  ("hard-matrix.csv", "rerun-g3-matrix.csv", "rerun-g2-matrix.csv")]),
 }
 
 # local modules each producer imports (the CSV must also be newer than these)
@@ -67,6 +73,36 @@ IMPORTS = {
     "h_score.py":            ["h_corpus.py"],
     "h_matrix.py":           ["h_corpus.py", "g2_gates.py"],
 }
+
+
+def hai_so_co_khop(ra):
+    """MAP here and `csv-producer.map` are two registries for one fact, so they drift.
+
+    Why this exists. The module docstring records that hard-matrix.csv and hard-paired.csv were
+    registered in `csv-producer.map` on 13/08/2026 and NOT here, so this gate did not check them.
+    Ca 23/10/2026 it happened again, with ablation-nulls.csv. A duplicated registry that nobody
+    compares will keep doing this, so compare them and report any disagreement.
+    """
+    p = os.path.join(HERE, "csv-producer.map")
+    if not os.path.exists(p):
+        ra.append("thieu code/csv-producer.map, khong doi chieu duoc hai so")
+        return
+    tep = {}
+    with open(p, encoding="utf-8") as f:
+        for ln in f:
+            ln = ln.strip()
+            if not ln or ln.startswith("#") or "=" not in ln:
+                continue
+            k, v = ln.split("=", 1)
+            tep[k.strip()] = v.strip()
+    for k in sorted(k for k in tep if k.endswith(".csv") and k not in MAP):
+        ra.append("`%s` co trong csv-producer.map nhung KHONG co trong MAP: cong nay bo qua no" % k)
+    for k in sorted(k for k in MAP if k not in tep):
+        ra.append("`%s` co trong MAP nhung KHONG co trong csv-producer.map" % k)
+    for k in sorted(set(tep) & set(MAP)):
+        if tep[k] != MAP[k][1]:
+            ra.append("`%s` khai bo sinh khac nhau: tep noi %s, MAP noi %s"
+                      % (k, tep[k], MAP[k][1]))
 
 
 def mtime(p):
@@ -137,8 +173,16 @@ def main():
             print(f"      {o}")
         print("  An unlisted output is an unchecked output. Declare its producer and raw inputs.")
         return 2
+    lech = []
+    hai_so_co_khop(lech)
+    if lech:
+        print(f"\nBLOCK -- {len(lech)} chenh lech giua MAP va csv-producer.map:")
+        for l in lech:
+            print(f"      {l}")
+        print("  Hai so cho cung mot su that thi se lech. Sua ca hai, dung sua mot.")
+        return 2
     print(f"\nPASS -- {len(MAP)} CSVs (every CSV present in the directory), all newer than their "
-          f"producers and their raw data.")
+          f"producers and their raw data; MAP khop csv-producer.map.")
     return 0
 
 

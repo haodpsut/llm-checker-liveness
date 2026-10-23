@@ -49,7 +49,10 @@ code/
   h_matrix.py             the ablation matrix at thresholds that fire, both pool orderings,
                           plus the paired test and its exact intervals
   provenance.py           derives raw/PROVENANCE.md from the orchestration log
-  check_freshness.py      every CSV must be newer than its producer and its raw data
+  ablation_nulls.py       per ablation, the count of cells in which it differs from ATTEST,
+                          reported SEPARATELY for false-pass and for false-reject on clean work
+  check_freshness.py      every CSV must be newer than its producer and its raw data, and the two
+                          producer registries must agree with each other
   csv-producer.map        which script produces which CSV
   raw/                    76 raw checker logs + RUN-LOG.md + PROVENANCE.md
 paper/
@@ -72,7 +75,10 @@ python3 code/rerun_report.py     # -> paper/tables/rerun-*.csv
 python3 code/h_score.py          # -> paper/tables/hard-corpus.csv, hard-blindspot-shift.csv
 python3 code/corpus_tables.py    # -> paper/tables/compose.csv, corpus.csv
 python3 code/h_matrix.py         # -> paper/tables/hard-matrix.csv, hard-paired.csv
+python3 code/ablation_nulls.py   # -> paper/tables/ablation-nulls.csv; READS the three matrices
+                                 #    above, so it must run after them
 python3 code/check_freshness.py  # no table may be older than the data behind it
+python3 code/check_artifact_claims.py  # the artifact's own prose must match its contents
 ```
 
 ## Conventions this artifact tries to hold to
